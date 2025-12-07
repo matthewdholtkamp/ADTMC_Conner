@@ -10,7 +10,7 @@
             --BG3: rgb(96, 146, 92,1);
             --TextColor1: rgba(0,0,0,1);
             --TextColor2: rgba(235,235,235,1);
-            --Backgroundlightgray: rgb(243, 243, 243,1); 
+            --Backgroundlightgray: rgb(243, 243, 243,1);
             --Backgroundwhite: rgb(255, 251, 251,1);
             --Backgroundmiddlegray: rgb(218, 216, 216);
             --Backgroundsecondgray: rgb(196, 190, 190);
@@ -18,26 +18,39 @@
             --BannerRedOp: rgba(168,72,72,0.6);
             --Backgroundbluelight: rgba(0,66,92,1);
             --Backgroundbluedark: rgba(129,161,181,255);
+            --BodyBackground: rgba(240,242,245,1);
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
         }
 
+        body.dark-mode {
+            --BG2: rgba(255,194,34,0.9);
+            --BG3: rgb(96, 146, 92);
+            --TextColor1: rgba(235,235,235,1);
+            --TextColor2: rgba(235,235,235,1);
+            --Backgroundlightgray: rgb(45, 45, 45);
+            --Backgroundwhite: rgb(30, 30, 30);
+            --Backgroundmiddlegray: rgb(60, 60, 60);
+            --Backgroundsecondgray: rgb(80, 80, 80);
+            --BodyBackground: rgb(18, 18, 18);
+            --Backgroundbluelight: rgba(0, 86, 120, 1);
+        }
 
         *::-webkit-scrollbar{
             display: none;
           }
-        
+
         body {
-            background-color: rgba(240,242,245,1);
+            background-color: var(--BodyBackground);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
-        
+
         .container {
             width: 100%;
             height: 100vh;
@@ -56,7 +69,7 @@
             z-index: 3;
             flex-shrink: 0; /* Prevent shrinking */
         }
-        
+
         .menu-item-box {
             height: 100%;
             width: 35px;
@@ -67,7 +80,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        
+
         .menu-icon{
             display: flex;
             align-items: center;
@@ -122,10 +135,10 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     cursor: pointer;
     transform: translateY(-10px) scale(0.98);
-    
+
     /* Move transition to base class - this applies in both directions */
     transition: all 0.3s ease-in-out;
-    
+
     /* GPU acceleration */
     will-change: transform, opacity;
     backface-visibility: hidden;
@@ -161,7 +174,7 @@
             display: flex;
             flex: 1; /* Take remaining space */
             width: 100%;
-        }       
+        }
         .ABC, .CDE {
             transition: all 0.2s cubic-bezier(0.65, 0, 0.35, 1);
             display: flex;
@@ -169,7 +182,7 @@
             position: relative;
             overflow-Y: scroll;
         }
-        
+
         .ABC {
             background-color: var(--Backgroundwhite);
             z-index: 2;
@@ -186,7 +199,7 @@
             align-items: center;
             overflow: hidden;
             margin: 0 auto
-        }        
+        }
         /* Mobile styles (screen < 769px) */
         @media (max-width: 768px) {
 
@@ -207,14 +220,14 @@
             .content-wrapper {
                 flex-direction: column;
             }
-            
+
             .ABC {
                 width: 100%;
                 height: 100%;
                 padding: 5px;
                 overflow-y: scroll;
             }
-            
+
             .CDE {
                 width: 100%;
                 height: 100%;
@@ -223,14 +236,14 @@
                 left: 100%;
                 padding: 10px;
             }
-            
+
             /* When active */
             .container.active .ABC {
                 transform: translateX(-100%);
                 opacity: 0;
                 transition: opacity 0.3s ease-in-out;
             }
-            
+
             .container.active .CDE {
                 transform: translateX(-100%);
                 opacity: 1;
@@ -241,7 +254,7 @@
                margin-top: 25px;
 }
         }
-        
+
         /* Desktop styles (screen >= 769px) */
         @media (min-width: 769px) {
             *{
@@ -259,28 +272,28 @@
             body {
                 padding: 15px;
             }
-            
+
             .container {
                 max-width: 1200px;
                 height: 85vh;
                 border-radius: 20px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
-            
+
             .ABC {
                 width: 45%;
                 height: 100%;
                 padding: 10px;
                 overflow-y: scroll;
             }
-            
+
             .CDE {
                 width: 55%;
                 height: 100%;
                 padding: 10px;
             }
         }
-        
+
 button {
     background-color: var(--Backgroundbluelight);
     border: none;
@@ -310,7 +323,7 @@ button {
     background-color: var(--Backgroundwhite);
     transform: translateX(100%);
     opacity: 0;
-    
+
     /* Transition both properties */
     transition: opacity 0.3s ease;
 }
@@ -657,7 +670,7 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   visibility: hidden;
   background-color: var(--Backgroundlightgray);
   color: var(--TextColor1);
-  transition: opacity 0.4s ease, 
+  transition: opacity 0.4s ease,
               visibility 0.4s ease;
 }
 
@@ -683,7 +696,7 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   width: 90%;
   text-wrap: wrap;
-  margin: 0px, 0px, 15px, 15px 
+  margin: 0px, 0px, 15px, 15px
 }
 
 .dispo-top{
@@ -1399,7 +1412,7 @@ color: var(--TextColor1)
     width: 97%;
     margin-left: 1.5%;
 }
-        
+
 .bg4:not(.closed) {
     opacity: 1;
     visibility: visible;
@@ -1408,7 +1421,7 @@ color: var(--TextColor1)
     bottom: 2%;
     cursor: pointer;
 }
-        
+
 .bg4.keyed {
     height: 40%;
     bottom: 10%;
@@ -1424,7 +1437,7 @@ color: var(--TextColor1)
     bottom: 30%;
     overflow: hidden;
 }
-        
+
         .item-box {
             display: none;
             visibility: hidden;
@@ -1437,7 +1450,7 @@ color: var(--TextColor1)
             position: relative;
             transition: opacity 0.3s ease;
         }
-        
+
         .bg4.keyed .item-box {
             display: flex;
             opacity: 1;
@@ -1453,7 +1466,7 @@ color: var(--TextColor1)
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .item-tag {
             display: flex;
             align-items: center;
@@ -1461,17 +1474,17 @@ color: var(--TextColor1)
             padding: 12px 15px;
             border-radius: 10px;
         }
-        
+
         .item-tag input[type="checkbox"] {
             width: 20px;
             height: 20px;
             accent-color: var(--Backgroundbluelight);
         }
-        
+
         .item-tag label {
             font-weight: 400;
         }
-        
+
         .panel-title {
             font-weight: 400;
             width: 100%;
@@ -1480,9 +1493,9 @@ color: var(--TextColor1)
             justify-content: center;
             align-items: center;
         }
-        
+
         .bg4.keyed .panel-title,
-        .bg4.copied .panel-title, 
+        .bg4.copied .panel-title,
         .bg4.closing .panel-title{
             display: none;
         }
@@ -1504,23 +1517,23 @@ color: var(--TextColor1)
             justify-content: center;
             align-items: center;
         }
-        
+
         .copy-button:hover {
             background-color: var(--Backgroundmiddlegray);
             color: var(--TextColor1);
         }
-        
+
         .notification-text {
             display: none;
             font-weight: 400;
             text-align: center;
             padding: 20px;
         }
-        
+
         .bg4.closing .notification-text {
             display: block;
         }
-        
+
         .checkboxes-container {
             flex: 1;
             padding-bottom: 45px; /* Space for the button */
@@ -1652,4 +1665,3 @@ color: var(--TextColor1)
 .transition-div {
   transition: opacity 0.3s ease-in-out;
 }
-

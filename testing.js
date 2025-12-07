@@ -5201,3 +5201,199 @@ function updateCategoryContent(categoryIndex, contentArray) {
         });
     }
 }
+
+// Dark Mode Logic
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
+// Check for saved user preference, if any, on load of the website
+const savedDarkMode = localStorage.getItem('darkMode');
+
+// Enable Dark Mode
+const enableDarkMode = () => {
+  body.classList.add('dark-mode');
+  localStorage.setItem('darkMode', 'enabled');
+  if (darkModeToggle) darkModeToggle.textContent = 'Light Mode';
+}
+
+// Disable Dark Mode
+const disableDarkMode = () => {
+  body.classList.remove('dark-mode');
+  localStorage.setItem('darkMode', null);
+  if (darkModeToggle) darkModeToggle.textContent = 'Dark Mode';
+}
+
+// If the user already visited and enabled darkMode
+// start things off with it on
+if (savedDarkMode === 'enabled') {
+  enableDarkMode();
+}
+
+// When someone clicks the button
+if (darkModeToggle) {
+  darkModeToggle.addEventListener('click', () => {
+    // get their darkMode setting
+    const darkMode = localStorage.getItem('darkMode');
+
+    // if it not current enabled, enable it
+    if (darkMode !== 'enabled') {
+      enableDarkMode();
+    // if it has been enabled, turn it off
+    } else {
+      disableDarkMode();
+    }
+  });
+}
+
+// Global Search Logic
+const searchInput = document.getElementById('globalSearch');
+const searchResults = document.getElementById('searchResults');
+let searchableItems = [];
+
+// Initialize searchable items on load
+document.addEventListener('DOMContentLoaded', () => {
+    // Index Categories/Subcategories
+    const catBtns = document.querySelectorAll('.catbtn');
+    catBtns.forEach(btn => {
+        // Only index actual subcategory buttons, not main category buttons if they exist
+        // But in this structure, all .catbtn are clickable.
+        // We need to differentiate if it's a main category (A-M) or sub (A-1, etc)
+        // Main categories have text like "A." and "EAR, NOSE..."
+        // Sub categories have text like "A-1" and "Sore Throat..."
+        // Both are .catbtn
+
+        const textIcon = btn.querySelector('.texticon').innerText.trim();
+        const btnText = btn.querySelector('.btn-text').innerText.trim();
+        const fullText = textIcon + ' ' + btnText;
+
+        searchableItems.push({
+            id: btn.id,
+            text: fullText,
+            type: 'category',
+            element: btn
+        });
+    });
+
+    // Index Medications
+    const medBtns = document.querySelectorAll('.medbtn');
+    medBtns.forEach(btn => {
+        const btnText = btn.querySelector('.btn-text').innerText.trim();
+        searchableItems.push({
+            id: btn.id,
+            text: btnText,
+            type: 'medication',
+            element: btn
+        });
+    });
+});
+
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        searchResults.innerHTML = '';
+
+        if (query.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        const filteredItems = searchableItems.filter(item =>
+            item.text.toLowerCase().includes(query)
+        );
+
+        if (filteredItems.length > 0) {
+            searchResults.style.display = 'block';
+            filteredItems.forEach(item => {
+                const div = document.createElement('div');
+                div.style.padding = '8px';
+                div.style.borderBottom = '1px solid #eee';
+                div.style.cursor = 'pointer';
+                div.style.color = 'var(--TextColor1)';
+                div.innerText = item.text;
+
+                div.addEventListener('click', () => {
+                    // Simulate click on the actual button
+                    // Need to handle navigation logic if needed
+                    // If it's a subcategory (A-1), we need to make sure the parent category (A) is open?
+                    // Or does clicking the button handle everything?
+                    // Based on existing JS:
+                    // if button is in main menu (category A), it opens sub menu A.
+                    // if button is in sub menu (A-1), it opens the sheet.
+
+                    // We need to make sure we are not just clicking a button that is hidden and expecting it to work if it relies on visibility.
+                    // But the click handler seems robust.
+
+                    // However, if we search for "Sore Throat" (A-1) and click it,
+                    // but we are currently in main menu.
+                    // The button A-1 is inside <div id="categoryA"> which is hidden.
+                    // The click handler:
+                    // if (btn.closest(".sel-box") === main) -> Category A logic
+                    // else -> Subcategory logic.
+
+                    // So if we click A-1, it should execute the subcategory logic.
+                    // Logic:
+                    // 1. Hide infoContent
+                    // 2. Daddy (sel-box) gets place-left
+                    // 3. Update titles
+                    // 4. Show sub-page
+
+                    // The issue: btn.closest(".sel-box") might be hidden.
+                    // The existing code uses "main" variable which is #main-categories.
+                    // If we click A-1, closest sel-box is #categoryA.
+                    // It is not === main.
+                    // So it runs subcategory logic.
+                    // Does it depend on #categoryA being visible?
+                    // "daddy.classList.remove("selected"); daddy.classList.add("place-left")"
+                    // If #categoryA was not selected/active, adding place-left is fine.
+
+                    // But we might need to ensure main menu is moved away?
+                    // The "main" var is global.
+                    // If we are at main menu, main has "active".
+                    // If we trigger A-1 click:
+                    // It does: daddy (#categoryA) add place-left.
+                    // But Main is still active? No.
+                    // We need to make sure the view transitions correctly.
+
+                    // Actually, if we just trigger the click, the JS handles "daddy".
+                    // But it assumes we are navigating FROM "daddy".
+                    // If we are at Main, and click A-1.
+                    // Daddy is #categoryA.
+                    // #categoryA becomes place-left.
+                    // Main is STILL active.
+                    // So we might end up with Main Active AND SubPage Open.
+                    // This might overlay weirdly.
+
+                    // Fix: We should probably ensure navigation state is clean.
+                    // But let's try just clicking and see.
+                    // A safe bet is to simulate the full path for subcategories?
+                    // Or just handle the UI state manually here.
+
+                    // Let's rely on the click for now, but handle the main menu state.
+                    // We need to move ANY currently active view to the left to preserve history stack
+                    const activeBoxes = document.querySelectorAll('.sel-box.active');
+                    activeBoxes.forEach(box => {
+                        box.classList.remove('active');
+                        box.classList.add('place-left');
+                    });
+
+                    // Also close search results
+                    searchResults.style.display = 'none';
+                    searchInput.value = '';
+
+                    item.element.click();
+                });
+
+                searchResults.appendChild(div);
+            });
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    // Close search when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+        }
+    });
+}
