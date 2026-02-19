@@ -5287,8 +5287,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Debounce function to limit the rate of function execution
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
+    searchInput.addEventListener('input', debounce((e) => {
         const query = e.target.value.toLowerCase();
         searchResults.innerHTML = '';
 
@@ -5388,7 +5401,7 @@ if (searchInput) {
         } else {
             searchResults.style.display = 'none';
         }
-    });
+    }, 300));
 
     // Close search when clicking outside
     document.addEventListener('click', (e) => {
