@@ -3440,7 +3440,8 @@ const link1 ={
             setOpacity(line1, '1');
             setOpacity(line2, '1');
             setOpacity(line3, '1');
-            currentIconState = 'Menu'
+            currentIconState = 'Menu';
+            menuIconBox.setAttribute('aria-label', 'Menu');
         }
         
         function showArrow() {
@@ -3451,6 +3452,7 @@ const link1 ={
             setOpacity(line2, '1');
             setOpacity(line3, '1');
             currentIconState = 'Back Arrow';
+            menuIconBox.setAttribute('aria-label', 'Go Back');
         }
         
         function showClose() {
@@ -3472,6 +3474,7 @@ const link1 ={
                 setOpacity(line3, '1');
             }
             currentIconState = 'close';
+            menuIconBox.setAttribute('aria-label', 'Close');
         }
 
   // Function to show the appropriate ADTsheet
@@ -3620,6 +3623,13 @@ function updateInfoContentText() {
   const med_button = document.querySelector("#section_tag")
 
 // Menu icon click functionality (acts as back button)
+menuIconBox.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        menuIconBox.click();
+    }
+});
+
 menuIconBox.addEventListener('click', function() {
     medsheet.classList.remove("open")
     if(main.classList.contains("active")){
