@@ -5409,7 +5409,8 @@ if (searchInput) {
                 searchResults.appendChild(div);
             });
         } else {
-            searchResults.style.display = 'none';
+            searchResults.style.display = 'block';
+            searchResults.innerHTML = '<div style="padding: 8px; color: var(--TextColor1);">No results found</div>';
         }
     }, 300));
 
