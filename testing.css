@@ -1670,3 +1670,16 @@ color: var(--TextColor1)
 .transition-div {
   transition: opacity 0.3s ease-in-out;
 }
+
+/* Accessibility Focus Indicators */
+.catbtn:focus-visible,
+.medbtn:focus-visible,
+.contbox-top:focus-visible,
+.close:focus-visible,
+.dispo-icon:focus-visible,
+.Aa:focus-visible,
+.bg4:focus-visible {
+    outline: 2px solid var(--Backgroundbluedark);
+    outline-offset: 2px;
+    z-index: 1000;
+}
