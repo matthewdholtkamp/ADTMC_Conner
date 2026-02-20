@@ -5421,3 +5421,44 @@ if (searchInput) {
         }
     });
 }
+
+// Initialize Accessibility Features
+document.addEventListener('DOMContentLoaded', () => {
+    function initializeAccessibility() {
+        const accessibleSelectors = [
+            '.catbtn',
+            '.medbtn',
+            '.contbox-top',
+            '.close',
+            '.dispo-icon',
+            '.Aa',
+            '.bg4'
+        ];
+
+        const elements = document.querySelectorAll(accessibleSelectors.join(', '));
+
+        elements.forEach(el => {
+            if (!el.hasAttribute('role')) {
+                el.setAttribute('role', 'button');
+            }
+            if (!el.hasAttribute('tabindex')) {
+                el.setAttribute('tabindex', '0');
+            }
+
+            // Avoid adding multiple listeners if run multiple times
+            if (!el.dataset.keyboardListenerAttached) {
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault(); // Prevent scrolling for Space
+                        // e.stopPropagation(); // Caution with stopPropagation, but might be needed if nested.
+                        // For now, let's leave it out unless needed to avoid side effects.
+                        el.click();
+                    }
+                });
+                el.dataset.keyboardListenerAttached = 'true';
+            }
+        });
+    }
+
+    initializeAccessibility();
+});
