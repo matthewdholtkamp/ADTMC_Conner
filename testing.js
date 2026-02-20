@@ -4167,63 +4167,6 @@ function CheckTopMarker(){
   }
 }
 
-let medTimeout;
-window.addEventListener('resize', function() {
-    clearTimeout(medTimeout);
-    medTimeout = setTimeout(function() {
-
-        // get viewtype
-        var app_state;
-        if(document.querySelector(".sub-page").classList.contains("open") || medsheet.classList.contains("open")){
-        // if sub-page with algorithms is open
-        app_state = "ADTsheet| medsheet"
-        }else{
-        //we have to determine if main or if a sel-box is place-left
-        if(main.classList.contains("place-left")){
-         app_state = "subcategory"
-        }else{
-
-         app_state = "main"
-        }
-        }
-
-        //Mobile
-        if (window.innerWidth < 768) {
-
-              infoContent.classList.add("active")
-              info_container.classList.remove("active")
-              if(app_state === "ADTsheet| medsheet"){
-                if(!container.classList.contains("active")){
-                container.classList.add("active")
-                }
-                if(!pagetop.classList.contains("min")){
-                pagetop.classList.add("min")
-                }
-            }else 
-              if(app_state === "subcategory" || app_state === "main"){
-              container.classList.remove("active")
-            }
-        } else {
-
-        //for desktop view
-
-            pagetop.classList.remove("min")
-            container.classList.remove("active");
-            if(app_state === "ADTsheet| medsheet"){
-              if(!info_container.classList.contains("active")){
-                info_container.classList.add("active")
-              }
-            }else
-            if(app_state ==="subcategory"){
-              updateInfoContentText()
-              infoContent.classList.remove("hidden")
-            }else if(app_state === "main"){
-              updateInfoContentText()
-              infoContent.classList.remove("hidden")
-            }
-        }
-    }, 100);
-});
 
 // Initialize variables
 let MedMarkerObserver = null;
@@ -4303,14 +4246,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set up the medsheet observer
   setupMedsheetObserver();
   
-  // Also set up resize listener to recheck when window is resized
-  window.addEventListener('resize', function() {
-    const medsheet = document.querySelector(".medsheet");
-    if (medsheet && medsheet.classList.contains("open")) {
-      console.log("Window resized while medsheet is open, rechecking MedMarker");
-      checkmedmarker();
-    }
-  });
 });
 
 
@@ -4423,6 +4358,10 @@ let resizeTimeout;
 window.addEventListener('resize', function() {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(function() {
+        // Recheck MedMarker if medsheet is open (moved from separate listener)
+        if (medsheet && medsheet.classList.contains("open")) {
+             checkmedmarker();
+        }
 
         // get viewtype
         var app_state;
