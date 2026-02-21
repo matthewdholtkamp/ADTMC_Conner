@@ -1678,7 +1678,9 @@ color: var(--TextColor1)
 .close:focus-visible,
 .dispo-icon:focus-visible,
 .Aa:focus-visible,
-.bg4:focus-visible {
+.bg4:focus-visible,
+.main_menu_choice:focus-visible,
+.submitbottom_button:focus-visible {
     outline: 2px solid var(--Backgroundbluedark);
     outline-offset: 2px;
     z-index: 1000;
