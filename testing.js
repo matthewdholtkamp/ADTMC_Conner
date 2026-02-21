@@ -3555,66 +3555,81 @@ function updateInfoContentText() {
               Su.classList.add("open")
               var sheetid = sheet.id
               sheet.classList.add("selected")
-              const existing = document.getElementsByClassName("made")
-              while(existing.length > 0){
-                existing[0].parentNode.removeChild(existing[0])
-              }
               const a = link1[sheetid]
-                    const JY = [
-        JY1 = a["DACT1"],
-        JY2 = a["DACT2"],
-        JY3 = a["DACT3"],
-        JY4 = a["DPRED"],
-        JY5 = a["DP1"],
-        JY6 = a["DP2"],
-        JY7 = a["DP3"],
-        JY8 = a["DP4"],
-        JY9 = a["DPRE"],
-        JY10 = a["DPRO"],
-        JY11 = a["DLIM"],
-        JY12 = a["GEN"],
-        JY13 = a["MED"],
-        JY14 = a["STP"],
-        JY15 = a["RF"],
-        JY16 = a["DDX"],
-      ]
-      const JERK = [
-        JY1 = sheet.querySelector(".ACT1"),
-        JY2 = sheet.querySelector(".ACT2"),
-        JY3 = sheet.querySelector(".ACT3"),
-        JY4 = sheet.querySelector(".DPRED"),
-        JY5 = sheet.querySelector(".JDP1"),
-        JY6 = sheet.querySelector(".JDP2"),
-        JY7 = sheet.querySelector(".JDP3"),
-        JY8 = sheet.querySelector(".JDP4"),
-        JY9 = sheet.querySelector(".JRETEST"),
-        JY10 = sheet.querySelector(".JDPRO"),
-        JY11 = sheet.querySelector(".LIM"),
-        JY12 = document.querySelector(".GEN"),
-        JY13 = document.querySelector(".MED"),
-        JY14 = document.querySelector(".STP"),
-        JY15 = document.querySelector(".RF"),
-        JY16 = document.querySelector(".DDX")
-      ]
-      JY.forEach(ele => {
-        if(ele == null){null}else{
-          let position = JY.indexOf(ele)
-          if(JERK[position] == null){
-            null
-          }else{
-          const container = JERK[position]
-          var ul = document.createElement("ul");
-          ul.classList.add("made")
-          ul.innerHTML = ""
-          for (i = 0; i <= ele.length-1; i++){
-            var li = document.createElement('li')
-            li.innerHTML = ""
-            li.innerHTML = ele[i]
-            ul.appendChild(li)
-          } container.appendChild(ul)
-        }
-        } 
-      });
+              const JY = [
+                JY1 = a["DACT1"],
+                JY2 = a["DACT2"],
+                JY3 = a["DACT3"],
+                JY4 = a["DPRED"],
+                JY5 = a["DP1"],
+                JY6 = a["DP2"],
+                JY7 = a["DP3"],
+                JY8 = a["DP4"],
+                JY9 = a["DPRE"],
+                JY10 = a["DPRO"],
+                JY11 = a["DLIM"],
+                JY12 = a["GEN"],
+                JY13 = a["MED"],
+                JY14 = a["STP"],
+                JY15 = a["RF"],
+                JY16 = a["DDX"],
+              ]
+              const JERK = [
+                JY1 = sheet.querySelector(".ACT1"),
+                JY2 = sheet.querySelector(".ACT2"),
+                JY3 = sheet.querySelector(".ACT3"),
+                JY4 = sheet.querySelector(".DPRED"),
+                JY5 = sheet.querySelector(".JDP1"),
+                JY6 = sheet.querySelector(".JDP2"),
+                JY7 = sheet.querySelector(".JDP3"),
+                JY8 = sheet.querySelector(".JDP4"),
+                JY9 = sheet.querySelector(".JRETEST"),
+                JY10 = sheet.querySelector(".JDPRO"),
+                JY11 = sheet.querySelector(".LIM"),
+                JY12 = document.querySelector(".GEN"),
+                JY13 = document.querySelector(".MED"),
+                JY14 = document.querySelector(".STP"),
+                JY15 = document.querySelector(".RF"),
+                JY16 = document.querySelector(".DDX")
+              ]
+
+              // Clear global containers (indices 11-15)
+              for (let i = 11; i < 16; i++) {
+                if (JERK[i]) {
+                  const existing = JERK[i].querySelectorAll(".made");
+                  existing.forEach(e => e.remove());
+                }
+              }
+
+              JY.forEach((ele, index) => {
+                if (ele == null) {
+                  null
+                } else {
+                  // For local containers (index < 11), skip if already populated
+                  if (index < 11) {
+                    if (JERK[index] && JERK[index].querySelector(".made")) {
+                      return;
+                    }
+                  }
+
+                  let position = index; // Use index directly
+                  if (JERK[position] == null) {
+                    null
+                  } else {
+                    const container = JERK[position]
+                    var ul = document.createElement("ul");
+                    ul.classList.add("made")
+                    ul.innerHTML = ""
+                    for (i = 0; i <= ele.length - 1; i++) {
+                      var li = document.createElement('li')
+                      li.innerHTML = ""
+                      li.innerHTML = ele[i]
+                      ul.appendChild(li)
+                    }
+                    container.appendChild(ul)
+                  }
+                }
+              });
           }
       });
   });
