@@ -5371,7 +5371,9 @@ document.addEventListener('DOMContentLoaded', () => {
             '.close',
             '.dispo-icon',
             '.Aa',
-            '.bg4'
+            '.bg4',
+            '.main_menu_choice',
+            '.submitbottom_button'
         ];
 
         const elements = document.querySelectorAll(accessibleSelectors.join(', '));
