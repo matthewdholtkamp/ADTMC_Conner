@@ -3188,107 +3188,16 @@ const F5decision = {
   }  
 
 //map main categories to subcategories in html
-const subcatboxes = {
-  btnA : document.querySelector("#categoryA"),
-  btnB : document.querySelector("#categoryB"),
-  btnC : document.querySelector("#categoryC"),
-  btnD : document.querySelector("#categoryD"),
-  btnE : document.querySelector("#categoryE"),
-  btnF : document.querySelector("#categoryF"),
-  btnG : document.querySelector("#categoryG"),
-  btnH : document.querySelector("#categoryH"),
-  btnI : document.querySelector("#categoryI"),
-  btnJ : document.querySelector("#categoryJ"),
-  btnK : document.querySelector("#categoryK"),
-  btnL : document.querySelector("#categoryL"),
-  btnM : document.querySelector("#categoryM"),
-  btnA1 : document.querySelector("#A-1"),
-  btnA2 : document.querySelector("#A-2"),
-  btnA3 : document.querySelector("#A-3"),
-  btnA4 : document.querySelector("#A-4"),
-  btnA5 : document.querySelector("#A-5"),
-  btnB1 : document.querySelector("#B-1"),
-  btnB2 : document.querySelector("#B-2"),
-  btnB3 : document.querySelector("#B-3"),
-  btnB4 : document.querySelector("#B-4"),
-  btnB5 : document.querySelector("#B-5"),
-  btnB6 : document.querySelector("#B-6"),
-  btnB7 : document.querySelector("#B-7"),
-  btnB8 : document.querySelector("#B-8"),
-  btnB9 : document.querySelector("#B-9"),
-  btnB10 : document.querySelector("#B-10"),
-  btnB11 : document.querySelector("#B-11"),
-  btnC1 : document.querySelector("#C-1"),
-  btnC2 : document.querySelector("#C-2"),
-  btnC3 : document.querySelector("#C-3"),
-  btnC4 : document.querySelector("#C-4"),
-  btnC5 : document.querySelector("#C-5"),
-  btnC6 : document.querySelector("#C-6"),
-  btnC7 : document.querySelector("#C-7"),
-  btnD1 : document.querySelector("#D-1"),
-  btnD2 : document.querySelector("#D-2"),
-  btnE1 : document.querySelector("#E-1"),
-  btnE2 : document.querySelector("#E-2"),
-  btnE3 : document.querySelector("#E-3"),
-  btnE4 : document.querySelector("#E-4"),
-  btnF1 : document.querySelector("#F-1"),
-  btnF2 : document.querySelector("#F-2"),
-  btnF3 : document.querySelector("#F-3"),
-  btnF4 : document.querySelector("#F-4"),
-  btnF5 : document.querySelector("#F-5"),
-  btnF6 : document.querySelector("#F-6"),
-  btnG1 : document.querySelector("#G-1"),
-  btnG2 : document.querySelector("#G-2"),
-  btnH1 : document.querySelector("#H-1"),
-  btnH2 : document.querySelector("#H-2"),
-  btnH3 : document.querySelector("#H-3"),
-  btnH4 : document.querySelector("#H-4"),
-  btnI1 : document.querySelector("#I-1"),
-  btnI2 : document.querySelector("#I-2"),
-  btnI3 : document.querySelector("#I-3"),
-  btnI4 : document.querySelector("#I-4"),
-  btnI5 : document.querySelector("#I-5"),
-  btnI6 : document.querySelector("#I-6"),
-  btnJ1 : document.querySelector("#J-1"),
-  btnJ2 : document.querySelector("#J-2"),
-  btnJ3 : document.querySelector("#J-3"),
-  btnJ4 : document.querySelector("#J-4"),
-  btnJ5 : document.querySelector("#J-5"),
-  btnJ6 : document.querySelector("#J-6"),
-  btnJ7 : document.querySelector("#J-7"),
-  btnJ8 : document.querySelector("#J-8"),
-  btnJ9 : document.querySelector("#J-9"),
-  btnJ10 : document.querySelector("#J-10"),
-  btnJ11 : document.querySelector("#J-11"),
-  btnJ12 : document.querySelector("#J-12"),
-  btnJ13 : document.querySelector("#J-13"),
-  btnJ14 : document.querySelector("#J-14"),
-  btnJ15 : document.querySelector("#J-15"),
-  btnJ16 : document.querySelector("#J-16"),
-  btnJ17 : document.querySelector("#J-17"),
-  btnJ18 : document.querySelector("#J-18"),
-  btnK1 : document.querySelector("#K-1"),
-  btnK2 : document.querySelector("#K-2"),
-  btnK3 : document.querySelector("#K-3"),
-  btnK4 : document.querySelector("#K-4"),
-  btnK5 : document.querySelector("#K-5"),
-  btnK6 : document.querySelector("#K-6"),
-  btnK7 : document.querySelector("#K-7"),
-  btnL1 : document.querySelector("#L-1"),
-  btnL2 : document.querySelector("#L-2"),
-  btnL3 : document.querySelector("#L-3"),
-  btnL4 : document.querySelector("#L-4"),
-  btnL5 : document.querySelector("#L-5"),
-  btnL6 : document.querySelector("#L-6"),
-  btnL7 : document.querySelector("#L-7"),
-  btnL8 : document.querySelector("#L-8"),
-  btnL9 : document.querySelector("#L-9"),
-  btnL10 : document.querySelector("#L-10"),
-  btnL11 : document.querySelector("#L-11"),
-  btnL12 : document.querySelector("#L-12"),
-  btnM1 : document.querySelector("#M-1"),
-  btnM2 : document.querySelector("#M-2"), 
-};
+// Optimization: Dynamically resolve DOM elements on click instead of caching all ~150 elements at startup.
+function getSubcatBox(btnId) {
+  const letter = btnId.charAt(3);
+  const suffix = btnId.substring(4);
+  if (suffix === "") {
+    return document.getElementById("category" + letter);
+  } else {
+    return document.getElementById(letter + "-" + suffix);
+  }
+}
 //map the ADTsheet in HTML to the above variables
 const link1 ={
   "A-1" : A1decision,
@@ -3517,7 +3426,7 @@ function updateInfoContentText() {
   subItems.forEach(function(btn){
       btn.addEventListener("click", () => {
           var btnid = btn.id;
-          var sheet = subcatboxes[btnid];
+          var sheet = getSubcatBox(btnid);
           var Su = document.querySelector(".sub-page")
           if (btn.closest(".sel-box") === main) {
               // Moving from main to category view
