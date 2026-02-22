@@ -5401,6 +5401,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.setAttribute('tabindex', '0');
             }
 
+            // Add specific aria-labels for icon-only buttons
+            if (el.classList.contains('close') && !el.hasAttribute('aria-label')) {
+                el.setAttribute('aria-label', 'Close details');
+            }
+            if (el.classList.contains('dispo-icon') && !el.hasAttribute('aria-label')) {
+                el.setAttribute('aria-label', 'View decision details');
+            }
+
             // Avoid adding multiple listeners if run multiple times
             if (!el.dataset.keyboardListenerAttached) {
                 el.addEventListener('keydown', (e) => {
