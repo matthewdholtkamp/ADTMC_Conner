@@ -5126,6 +5126,7 @@ let searchableItems = [];
 // Initialize searchable items on load
 document.addEventListener('DOMContentLoaded', () => {
     // Index Categories/Subcategories
+    // Optimization: Use textContent instead of innerText to avoid layout thrashing during initialization
     const catBtns = document.querySelectorAll('.catbtn');
     catBtns.forEach(btn => {
         // Only index actual subcategory buttons, not main category buttons if they exist
@@ -5135,8 +5136,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Sub categories have text like "A-1" and "Sore Throat..."
         // Both are .catbtn
 
-        const textIcon = btn.querySelector('.texticon').innerText.trim();
-        const btnText = btn.querySelector('.btn-text').innerText.trim();
+        const textIcon = btn.querySelector('.texticon').textContent.trim();
+        const btnText = btn.querySelector('.btn-text').textContent.trim();
         const fullText = textIcon + ' ' + btnText;
 
         searchableItems.push({
@@ -5150,7 +5151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Index Medications
     const medBtns = document.querySelectorAll('.medbtn');
     medBtns.forEach(btn => {
-        const btnText = btn.querySelector('.btn-text').innerText.trim();
+        const btnText = btn.querySelector('.btn-text').textContent.trim();
         searchableItems.push({
             id: btn.id,
             text: btnText,
