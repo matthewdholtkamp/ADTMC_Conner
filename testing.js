@@ -5191,11 +5191,21 @@ if (searchInput) {
             searchResults.style.display = 'block';
             filteredItems.forEach(item => {
                 const div = document.createElement('div');
+                div.className = 'search-result-item';
+                div.setAttribute('role', 'button');
+                div.setAttribute('tabindex', '0');
                 div.style.padding = '8px';
                 div.style.borderBottom = '1px solid #eee';
                 div.style.cursor = 'pointer';
                 div.style.color = 'var(--TextColor1)';
                 div.innerText = item.text;
+
+                div.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        div.click();
+                    }
+                });
 
                 div.addEventListener('click', () => {
                     // Simulate click on the actual button

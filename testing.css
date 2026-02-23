@@ -1672,6 +1672,10 @@ color: var(--TextColor1)
 }
 
 /* Accessibility Focus Indicators */
+.search-result-item:hover {
+    background-color: var(--Backgroundlightgray);
+}
+
 .catbtn:focus-visible,
 .medbtn:focus-visible,
 .contbox-top:focus-visible,
@@ -1680,7 +1684,8 @@ color: var(--TextColor1)
 .Aa:focus-visible,
 .bg4:focus-visible,
 .main_menu_choice:focus-visible,
-.submitbottom_button:focus-visible {
+.submitbottom_button:focus-visible,
+.search-result-item:focus-visible {
     outline: 2px solid var(--Backgroundbluedark);
     outline-offset: 2px;
     z-index: 1000;
