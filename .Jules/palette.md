@@ -5,3 +5,7 @@
 ## 2026-02-20 - Retrofitting Non-Semantic Buttons
 **Learning:** The application heavily relies on `div` elements with classes like `.catbtn` and `.medbtn` for interactivity, lacking native keyboard support. Retrofitting these with `role="button"` and `tabindex="0"` via a centralized JavaScript initializer proved more efficient and less invasive than rewriting thousands of lines of HTML.
 **Action:** When facing large legacy codebases with widespread non-semantic interactive elements, use a centralized JS function to inject accessibility attributes and keyboard listeners on load, rather than refactoring the markup component by component.
+
+## 2026-02-21 - Accessible Dynamic Content
+**Learning:** `initializeAccessibility` runs only on DOMContentLoaded, missing dynamically generated elements like search results. These elements require explicit injection of accessibility attributes (`role`, `tabindex`) and event listeners (`keydown`) at the time of creation.
+**Action:** When creating interactive elements via JavaScript (e.g., in a loop), always attach accessibility attributes and keyboard handlers immediately, rather than relying on a global initializer that runs once on load.
