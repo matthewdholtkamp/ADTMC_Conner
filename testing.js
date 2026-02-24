@@ -5177,10 +5177,9 @@ function debounce(func, wait) {
 if (searchInput) {
     searchInput.addEventListener('input', debounce((e) => {
         const query = e.target.value.toLowerCase();
-        searchResults.innerHTML = '';
-
         if (query.length < 2) {
             searchResults.style.display = 'none';
+            searchResults.innerHTML = '';
             return;
         }
 
@@ -5189,7 +5188,9 @@ if (searchInput) {
         );
 
         if (filteredItems.length > 0) {
-            searchResults.style.display = 'block';
+            // Optimization: Use DocumentFragment to batch DOM insertions and avoid layout thrashing
+            const fragment = document.createDocumentFragment();
+
             filteredItems.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-result-item';
@@ -5199,7 +5200,8 @@ if (searchInput) {
                 div.style.borderBottom = '1px solid #eee';
                 div.style.cursor = 'pointer';
                 div.style.color = 'var(--TextColor1)';
-                div.innerText = item.text;
+                // Optimization: Use textContent instead of innerText
+                div.textContent = item.text;
 
                 div.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -5280,8 +5282,12 @@ if (searchInput) {
                     item.element.click();
                 });
 
-                searchResults.appendChild(div);
+                fragment.appendChild(div);
             });
+
+            searchResults.innerHTML = '';
+            searchResults.appendChild(fragment);
+            searchResults.style.display = 'block';
         } else {
             searchResults.style.display = 'block';
             searchResults.innerHTML = '<div style="padding: 8px; color: var(--TextColor1);">No results found</div>';
