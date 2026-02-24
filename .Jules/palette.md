@@ -9,3 +9,7 @@
 ## 2026-02-21 - Accessible Dynamic Content
 **Learning:** `initializeAccessibility` runs only on DOMContentLoaded, missing dynamically generated elements like search results. These elements require explicit injection of accessibility attributes (`role`, `tabindex`) and event listeners (`keydown`) at the time of creation.
 **Action:** When creating interactive elements via JavaScript (e.g., in a loop), always attach accessibility attributes and keyboard handlers immediately, rather than relying on a global initializer that runs once on load.
+
+## 2026-02-22 - Taming Verbose Search Results
+**Learning:** Adding `aria-live="polite"` to a search results container causes screen readers to read *all* appended items, which is overwhelming for long lists.
+**Action:** Dynamically apply `aria-live="polite"` *only* when displaying status messages (like "No results found"), and remove the attribute when displaying the actual result list, relying on `role="listbox"` semantics for the items instead.

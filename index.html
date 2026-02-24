@@ -50,8 +50,8 @@
                 <div class="menu-banner-label">ADTMC 2.5</div>
             </div>
             <div class="search-box" style="margin-left: auto; display: flex; align-items: center; position: relative;">
-                <input type="text" id="globalSearch" placeholder="Search..." aria-label="Search content" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
-                <div id="searchResults" class="search-results" style="position: absolute; top: 40px; right: 0; background: var(--Backgroundwhite); border: 1px solid #ccc; width: 250px; max-height: 300px; overflow-y: auto; display: none; z-index: 1000; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+                <input type="text" id="globalSearch" placeholder="Search..." aria-label="Search content" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="searchResults" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
+                <div id="searchResults" class="search-results" role="listbox" style="position: absolute; top: 40px; right: 0; background: var(--Backgroundwhite); border: 1px solid #ccc; width: 250px; max-height: 300px; overflow-y: auto; display: none; z-index: 1000; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
             </div>
         </div>
         <div class="main_menu">

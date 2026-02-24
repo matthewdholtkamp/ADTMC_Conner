@@ -5181,6 +5181,7 @@ if (searchInput) {
 
         if (query.length < 2) {
             searchResults.style.display = 'none';
+            searchInput.setAttribute('aria-expanded', 'false');
             return;
         }
 
@@ -5190,10 +5191,12 @@ if (searchInput) {
 
         if (filteredItems.length > 0) {
             searchResults.style.display = 'block';
+            searchInput.setAttribute('aria-expanded', 'true');
+            searchResults.removeAttribute('aria-live');
             filteredItems.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-result-item';
-                div.setAttribute('role', 'button');
+                div.setAttribute('role', 'option');
                 div.setAttribute('tabindex', '0');
                 div.style.padding = '8px';
                 div.style.borderBottom = '1px solid #eee';
@@ -5284,6 +5287,8 @@ if (searchInput) {
             });
         } else {
             searchResults.style.display = 'block';
+            searchInput.setAttribute('aria-expanded', 'true');
+            searchResults.setAttribute('aria-live', 'polite');
             searchResults.innerHTML = '<div style="padding: 8px; color: var(--TextColor1);">No results found</div>';
         }
     }, 300));
@@ -5292,6 +5297,7 @@ if (searchInput) {
     document.addEventListener('click', (e) => {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
             searchResults.style.display = 'none';
+            searchInput.setAttribute('aria-expanded', 'false');
         }
     });
 }

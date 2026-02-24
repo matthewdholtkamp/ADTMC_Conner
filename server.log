@@ -1,0 +1,5 @@
+127.0.0.1 - - [24/Feb/2026 08:20:56] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [24/Feb/2026 08:20:56] "GET /testing.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Feb/2026 08:20:56] "GET /testing.css HTTP/1.1" 200 -
+127.0.0.1 - - [24/Feb/2026 08:20:57] code 404, message File not found
+127.0.0.1 - - [24/Feb/2026 08:20:57] "GET /test2/serviceWorker.js HTTP/1.1" 404 -
