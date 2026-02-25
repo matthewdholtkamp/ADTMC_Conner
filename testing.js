@@ -5300,6 +5300,18 @@ if (searchInput) {
             searchInput.setAttribute('aria-expanded', 'false');
         }
     });
+
+    // Keyboard shortcut for search
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+
+    // Update placeholder with shortcut hint
+    const isMac = navigator.userAgent.indexOf('Mac OS X') != -1;
+    searchInput.placeholder = `Search... (${isMac ? 'Cmd' : 'Ctrl'}+K)`;
 }
 
 // Initialize Accessibility Features
