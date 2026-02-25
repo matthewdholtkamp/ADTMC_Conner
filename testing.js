@@ -5193,6 +5193,10 @@ if (searchInput) {
             searchResults.style.display = 'block';
             searchInput.setAttribute('aria-expanded', 'true');
             searchResults.removeAttribute('aria-live');
+
+            // Optimization: Use DocumentFragment to batch DOM insertions
+            const fragment = document.createDocumentFragment();
+
             filteredItems.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'search-result-item';
@@ -5283,8 +5287,9 @@ if (searchInput) {
                     item.element.click();
                 });
 
-                searchResults.appendChild(div);
+                fragment.appendChild(div);
             });
+            searchResults.appendChild(fragment);
         } else {
             searchResults.style.display = 'block';
             searchInput.setAttribute('aria-expanded', 'true');
