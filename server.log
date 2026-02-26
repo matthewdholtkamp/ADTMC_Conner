@@ -1,20 +1,10 @@
-127.0.0.1 - - [25/Feb/2026 08:11:34] "GET /index.html HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:11:34] "GET /testing.css HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:11:34] "GET /testing.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:11:34] code 404, message File not found
-127.0.0.1 - - [25/Feb/2026 08:11:34] "GET /test2/serviceWorker.js HTTP/1.1" 404 -
-127.0.0.1 - - [25/Feb/2026 08:11:55] "GET /index.html HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:11:55] "GET /testing.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:11:55] "GET /testing.css HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:11:55] code 404, message File not found
-127.0.0.1 - - [25/Feb/2026 08:11:55] "GET /test2/serviceWorker.js HTTP/1.1" 404 -
-127.0.0.1 - - [25/Feb/2026 08:12:17] "GET /index.html HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:12:17] "GET /testing.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:12:17] "GET /testing.css HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:12:17] code 404, message File not found
-127.0.0.1 - - [25/Feb/2026 08:12:17] "GET /test2/serviceWorker.js HTTP/1.1" 404 -
-127.0.0.1 - - [25/Feb/2026 08:13:09] "GET /index.html HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:13:09] "GET /testing.js HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:13:09] "GET /testing.css HTTP/1.1" 200 -
-127.0.0.1 - - [25/Feb/2026 08:13:09] code 404, message File not found
-127.0.0.1 - - [25/Feb/2026 08:13:09] "GET /test2/serviceWorker.js HTTP/1.1" 404 -
+127.0.0.1 - - [26/Feb/2026 08:09:09] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Feb/2026 08:09:09] "GET /testing.js HTTP/1.1" 200 -
+127.0.0.1 - - [26/Feb/2026 08:09:09] "GET /testing.css HTTP/1.1" 200 -
+127.0.0.1 - - [26/Feb/2026 08:09:10] code 404, message File not found
+127.0.0.1 - - [26/Feb/2026 08:09:10] "GET /test2/serviceWorker.js HTTP/1.1" 404 -
+127.0.0.1 - - [26/Feb/2026 08:09:25] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [26/Feb/2026 08:09:25] "GET /testing.css HTTP/1.1" 200 -
+127.0.0.1 - - [26/Feb/2026 08:09:25] "GET /testing.js HTTP/1.1" 200 -
+127.0.0.1 - - [26/Feb/2026 08:09:25] code 404, message File not found
+127.0.0.1 - - [26/Feb/2026 08:09:25] "GET /test2/serviceWorker.js HTTP/1.1" 404 -

@@ -1690,3 +1690,25 @@ color: var(--TextColor1)
     outline-offset: 2px;
     z-index: 1000;
 }
+
+/* Skip to Content Link */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 10px;
+    background: var(--Backgroundbluelight);
+    color: var(--TextColor2);
+    padding: 10px 15px;
+    z-index: 9999;
+    text-decoration: none;
+    border-radius: 0 0 5px 5px;
+    transition: top 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--Backgroundbluedark);
+    outline-offset: 2px;
+}

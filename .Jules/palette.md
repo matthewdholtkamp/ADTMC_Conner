@@ -13,3 +13,7 @@
 ## 2026-02-22 - Taming Verbose Search Results
 **Learning:** Adding `aria-live="polite"` to a search results container causes screen readers to read *all* appended items, which is overwhelming for long lists.
 **Action:** Dynamically apply `aria-live="polite"` *only* when displaying status messages (like "No results found"), and remove the attribute when displaying the actual result list, relying on `role="listbox"` semantics for the items instead.
+
+## 2026-02-23 - Skip to Content for Keyboard Users
+**Learning:** Large monolithic pages with sticky headers or extensive navigation need a "Skip to Content" link to prevent keyboard fatigue. Adding `tabindex="-1"` to the target container is essential for the focus to actually move and stick in some browsers/contexts.
+**Action:** Always add `tabindex="-1"` to the target of a skip link if it is not an inherently focusable element.
