@@ -4373,21 +4373,25 @@ const existing = document.getElementsByClassName("submitmade")
 if(document.querySelector("#checkbox2").checked === true){
     Geeks.push("RED FLAGS:")
     rf_list.classList.remove("no")
+    const rfFragment = document.createDocumentFragment();
     JY15.forEach(rf =>{
 
       var redflag = document.createElement("li")
       redflag.classList.add("submitmade")
       redflag.classList.add("rf_tag")
       redflag.textContent = rf
-      rf_ul.append(redflag)
+      rfFragment.append(redflag)
       Geeks.push(rf)
     })
+    rf_ul.append(rfFragment);
 }else{rf_list.classList.add("no")}
 Geeks.push("")
 if(document.querySelector("#checkbox1").checked === true){
   var nodeslist = ADT.querySelectorAll(".Q.open")
   let arr = Array.from(nodeslist)
   let a = 0
+  const groupFragment = document.createDocumentFragment();
+  const submissionFragment = document.createDocumentFragment();
   while(a < arr.length){
     var current = arr[a]
     var Qclasses = ["QRED","Q1","Q2","Q3","Q4","Q5","Q6"]
@@ -4440,8 +4444,8 @@ if(document.querySelector("#checkbox1").checked === true){
     query_text.innerHTML = fstr
     query_text.classList.add("submitmade")
     query_text.classList.add("query_answer")
-    group.append(query_text)
-    group.append(query_answer)
+    groupFragment.append(query_text)
+    groupFragment.append(query_answer)
     const dispobox = current.querySelectorAll(".dispobox")
       dispobox.forEach(el =>{
         if(el.classList.contains("open")){
@@ -4454,12 +4458,14 @@ if(document.querySelector("#checkbox1").checked === true){
           if(action_card){
             dispo.innerText = thestufflabel + '\n' + action_card.innerText
           }
-          submission.append(dispo)
+          submissionFragment.append(dispo)
           Geeks.push("",dispo.innerText)
         }
       })
       a++
   }
+  group.append(groupFragment);
+  submission.append(submissionFragment);
   }
   if(document.querySelector("#checkbox3").checked === true){
   const ref_container = document.querySelector(".ref_ul")
@@ -5066,12 +5072,15 @@ function updateCategoryContent(categoryIndex, contentArray) {
         contentContainers[categoryIndex].innerHTML = '';
         
         // Add new content
+        // Optimization: Use DocumentFragment to batch DOM insertions
+        const fragment = document.createDocumentFragment();
         contentArray.forEach(contentItem => {
             const paragraph = document.createElement('div');
             paragraph.classList.add("med_content_opt")
             paragraph.innerHTML = contentItem;
-            contentContainers[categoryIndex].appendChild(paragraph);
+            fragment.appendChild(paragraph);
         });
+        contentContainers[categoryIndex].appendChild(fragment);
     }
 }
 
