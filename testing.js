@@ -2,9 +2,9 @@
 if ('serviceWorker' in navigator) {
   const swPath = '/test2/serviceWorker.js';
   const scope = '/test2/';
-  
+
   let registration;
-  
+
   // Function to check for content updates
   function checkForContentUpdates() {
     if (registration) {
@@ -20,25 +20,25 @@ if ('serviceWorker' in navigator) {
       });
     }
   }
-  
+
   // Register service worker
   navigator.serviceWorker.register(swPath, { scope: scope })
     .then(reg => {
       registration = reg;
       console.log('SW registered successfully with scope:', reg.scope);
-      
+
       // Check for content updates when page becomes visible
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') {
           checkForContentUpdates();
         }
       });
-      
+
       // Check for content updates on page load
       window.addEventListener('load', function() {
         checkForContentUpdates();
       });
-      
+
       // Listen for content update messages from service worker
       navigator.serviceWorker.addEventListener('message', event => {
         if (event.data.type === 'CONTENT_UPDATED') {
@@ -49,22 +49,22 @@ if ('serviceWorker' in navigator) {
           }
         }
       });
-      
+
       // Listen for controller change
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('New service worker activated, reloading page');
         window.location.reload();
       });
-      
+
       // If there's a waiting service worker, prompt user to update
       if (reg.waiting) {
         showUpdateNotification(reg.waiting);
       }
-      
+
       // Listen for updates
       reg.addEventListener('updatefound', () => {
         const newWorker = reg.installing;
-        
+
         newWorker.addEventListener('statechange', () => {
           if (newWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
@@ -77,14 +77,14 @@ if ('serviceWorker' in navigator) {
     .catch(error => {
       console.log('SW registration failed:', error);
     });
-  
+
   // Function to show update notification
   function showUpdateNotification(worker) {
     if (confirm('A new version is available. Update now?')) {
       worker.postMessage({ action: 'skipWaiting' });
     }
   }
-  
+
   // Manual update check function (can be called from a button)
   window.checkForUpdates = function() {
     if (registration) {
@@ -104,7 +104,7 @@ if ('serviceWorker' in navigator) {
     var infoContent = document.getElementById('infoContent');
     var infoLabel = document.querySelector(".subcategory-header")
 
-const  
+const
   A1DP1 =["DP1. Symptoms greater than 10 days, immunosuppression, inhaled steroid medications are related to diseases that are unlikely to go away without treatment. Hoarseness longer than 2 weeks requires a full laryngeal exam."],
   A1DP2 =["DP2. 4 questions that look at the chance of having a Group A Streptococcal (GAS) infection. If 3 of the questions are positive, there is 32% chance of having GAS and a rapid antigen test (RADT) should be performed. The RADT is effective for ruling out GAS in adults but some Soldiers with GAS are missed. Culture test is performed when the RADT is negative and Soldiers or their contacts are at higher risk for complications from a GAS infection. Culture generally takes 24-48 hours for the results to return."],
   A1DP3 =["Other protocols. Sore throat and hoarseness that are associated with a virus should be treated with minor-care. The other symptoms should be treated according to their associated protocols.","MCP for sore throat. A sore throat is often due to a viral infection. Minor-care consist of pain control, measures to decrease inflammation, getting plenty of rest and drinking plenty of fluids (water). Return for signs of the infection getting worse or progressing.","MCP for hoarseness. Hoarseness is often due to a virus or irritant. Minor-care consists of resting the vocal cords and avoidance of irritants (cigarette smoking, yelling, heartburn, post-nasal drip). This is a good opportunity to discuss the negative effects of tobacco use and encourage the Soldier to quit using tobacco, if applicable."],
@@ -119,7 +119,7 @@ const
   A1DDX = ['Viral Infections', 'Bacterial Infection', 'Meningitis', 'Neck Deep Tissue Infection', 'Candida infection', 'Strep Throat'],
   A2ACT1 = [],
   A2ACT2 = [],
-  A2ACT3 = [],  
+  A2ACT3 = [],
   A2DP1 = ["DP1. Signs of infection. All Soldiers with otitis media or moderate to severe otitis externa should be evaluated by a privileged provider to be considered for antibiotics."],
   A2DP2 = ["DP2. Vertigo requires an internal ear evaluation. Longer timeline and decreased hearing can be signs of a complication from an ear infection or alternate cause requiring a qualified provider evaluation."],
   A2DP3 = ["Mild otitis externa, temporal-mandibular joint (TMJ) dysfunction, and ear pain with normal exam should be treated with minor-care.","MCP for otitis externa. Soak wick of a cotton ball wick with OTC ear drops. Place in the ear for 24 hours while using the drops. Remove the cotton wick and continue drops for 1 week (3 days after the symptoms have resolved). Keep the ear canal dry. Use OTC ibuprofen as needed for pain. Return to clinic if not resolved in 1 week or worsening symptoms to include pain or fever.","MCP for TMJ is another common cause of pain around the ear. Evaluation includes seeing if the pain increases with opening and closing the jaw while placing the finger on the anterior inside of the ear to feel the joint. Ensure pain is not related to the heart. Use OTC ibuprofen for inflammation and pain. Refer to dental if history of teeth grinding. Instruct on avoidance of triggers (excessive chewing, chewing gum). Home therapy is jaw isometric exercises: jaw is open 1 inch and jaw is pushed 1) down against a loosely fisted hand and 2) forward against a hand for 5 seconds each, each set is repeated 5 times per session with 3 sessions per day. Return if not improving within three days."],
@@ -341,7 +341,7 @@ const
   B10GEN = ["pg. 47-48: ","Common anterior foot pains include around the big toe (bunion, sprain, arthritis, sesamoiditis, ingrown toenail, subungual hematoma) and below the 2nd and 3rd metatarsals (metatarsalgia, Morton’s neuroma, and plantar wart)."],
   B10MEDCOM = ["Initial Management of Fractures/Spinal Injury pg.69 (2)(d)"],
   B10STP1 = ["Subject Area 7: Musculoskeletal. Treat Common Musculoskeletal. Disorders. 081-833-0222 ","Subject Area 7: Musculoskeletal. Apply a Rigid Splint. 081-833-0263 ","Subject Area 7: Musculoskeletal. Apply and Elastic Bandage. 081-833-0264"],
-  B10DDX = ["Injury","Overuse","Plantar Fasciitis","Tarsal Tunnel Syndrome","Achilles Tendinopathy","Ingrown Toenail","Bunion"], 
+  B10DDX = ["Injury","Overuse","Plantar Fasciitis","Tarsal Tunnel Syndrome","Achilles Tendinopathy","Ingrown Toenail","Bunion"],
 
   B11ACT1 = ["Immobilize the injured extremity.","Start IV for suspected rhabdomyolysis","Crutches for suspected BSI"],
   B11ACT2 = ["Provide crutch if needed"],
@@ -390,7 +390,7 @@ const
   C2MEDCOM = ["Obtain Laboratory Specimens pg. 69-70 (2)(k)"],
   C2STP1 = [ "Subject Area 2: Medical Treatment. Initiate Treatment for a Poisoned Casualty. 081-833-0004", "Subject Area 6: Primary Care. Provide Treatment for Abdominal Disorders. 081-833-0239", "Subject Area 16: CBRN. Provide Treatment for a Radiation Casualty. 081-833-0280"],
   C2DDX = ["Food Intolerance", "Medication", "Infection (Viral/Bacterial)", "Dizziness", "Chest Pain", "Ear Pain", "Heartburn"],
-  
+
 //c3
   C3ACT1 = ["Pregnancy Screen/ Test"],
   C3ACT2 = ["Screen nausea, diarrhea, pelvic pain, constipation, heartburn, urinary Sx, or other symptoms"],
@@ -614,7 +614,7 @@ const
   F3GEN = ["pg. 81-82: ","“Numbness” may be used by the Soldier to describe muscle weakness, malaise, confusion, or abnormal sensation including tingling (a “pins and needles” sensation). Paralysis/weakness is a condition that refers to a loss of muscular strength resulting in difficulty or inability to move a body part. A complete loss of muscular strength is paralysis; a partial loss is weakness."],
   F3MEDCOM = ["Obtain Blood Glucose Levels pg.69(2)(f)"],
   F3STP1 = ["Subject Area 15: Primary Care. Operate a Glucometer 081-833-0257"],
-  
+
   F4ACT1 = ["Glucose < 70 - provide glucose","SpO2 <90 - start oxygen","H/O alcohol - give thiamine","H/O narcotics - give naloxone"],
   F4ACT2 = ["Check rectal temp if heat exposure concern"],
   F4ACT3 = [],
@@ -644,7 +644,7 @@ const
   F5GEN = ["pg. 85-86: ","The terms “depression, nervousness, anxiety, tension” and complaints of “nerves” or “being upset” may all be used by Soldiers to describe problems with mood. Complaints such as these are often due to situational or behavioral health factors, but may also be due to a physical condition. Everyone experiences emotional distress from time to time. However, when symptoms become continuous or interfere with daily functioning, or when suicidal or homicidal thoughts or self-harm are reported, the complaint must be taken seriously and further evaluated."],
   F5MEDCOM = ["N/A"],
   F5STP1 = ["Subject Area 6: Primary Care. Provide Treatment for a Behavioral Emergency 081-833-0246"],
-  
+
   F6ACT1 = [],
   F6ACT2 = [],
   F6ACT3 = [],
@@ -1572,7 +1572,7 @@ M2FLAG = ["N/A"],
 End = [];
 
 //Map the variables to html tags
-const A1decision = {  
+const A1decision = {
   "DACT1" : ["Perform Rapid Strep + Culture Test (barracks, positive close contact, immunosuppressed contact, h/o ARF)"],
   "DACT2" : [],
   "DACT3" : [],
@@ -1592,7 +1592,7 @@ const A1decision = {
   }
 
 
-const A2decision = {  
+const A2decision = {
 "DACT1" : A2ACT1,
 "DACT2" : A2ACT2,
 "DACT3" : A2ACT3,
@@ -1611,7 +1611,7 @@ const A2decision = {
 "DDX" : A2DDX
 }
 
-const A3decision = {  
+const A3decision = {
 "DACT1" : A3ACT1,
 "DACT2" : A3ACT2,
 "DACT3" : A3ACT3,
@@ -1629,7 +1629,7 @@ const A3decision = {
 "RF" : A3FLAG,
 "DDX" : A3DDX
 }
-const A4decision = {  
+const A4decision = {
   "DACT1" : A4ACT1,
   "DACT2" : A4ACT2,
   "DACT3" : A4ACT3,
@@ -1648,7 +1648,7 @@ const A4decision = {
   "DDX" : A4DDX
   }
 
-const A5decision = { 
+const A5decision = {
 "DACT1" : A5ACT1,
 "DACT2" : A5ACT2,
 "DACT3" : A5ACT3,
@@ -1666,7 +1666,7 @@ const A5decision = {
 "RF" : A5FLAG,
 "DDX" : A5DDX
 }
-const B1decision = { 
+const B1decision = {
 "DACT1" : B1ACT1,
 "DACT2" : B1ACT2,
 "DACT3" : B1ACT3,
@@ -2429,7 +2429,7 @@ const F5decision = {
   "RF" : I6FLAG,
   "DDX" : I6DDX
   }
-  
+
   const J1decision ={
     "DACT1" :J1ACT1,
   "DACT2" : J1ACT2,
@@ -3185,7 +3185,7 @@ const F5decision = {
   "STP" : M2STP1,
   "RF" : M2FLAG,
   "DDX" : M2DDX
-  }  
+  }
 
 //map main categories to subcategories in html
 // Optimization: Dynamically resolve DOM elements on click instead of caching all ~150 elements at startup.
@@ -3285,7 +3285,7 @@ const link1 ={
   "L-11" : L11decision,
   "L-12" : L12decision,
   "M-1" : M1decision,
-  "M-2" : M2decision 
+  "M-2" : M2decision
 }
   const sub3 = document.querySelector(".bg4")
   const sheets = document.querySelectorAll(".ADTsheet");
@@ -3315,7 +3315,7 @@ const link1 ={
                 element.style.stroke = 'currentColor';
             }
         }
-  
+
   let currentIconState = "Menu"
   // Function to update menu icon
   function updateMenuIcon() {
@@ -3352,7 +3352,7 @@ const link1 ={
             currentIconState = 'Menu';
             menuIconBox.setAttribute('aria-label', 'Menu');
         }
-        
+
         function showArrow() {
             line1.setAttribute('d', 'M5 12 L19 12'); // Top becomes baseline
             line2.setAttribute('d', 'M5 12 L9 8');   // Middle becomes top arrow
@@ -3363,7 +3363,7 @@ const link1 ={
             currentIconState = 'Back Arrow';
             menuIconBox.setAttribute('aria-label', 'Go Back');
         }
-        
+
         function showClose() {
             if (currentIconState === 'Menu') {
                 // Hamburger to X
@@ -3416,7 +3416,7 @@ function updateInfoContentText() {
         } else {
           infoSubtext.textContent = 'Select a subcategory';
         }
-        
+
     }
 }
 
@@ -3440,7 +3440,7 @@ function updateInfoContentText() {
               // Update menu icon
               updateMenuIcon();
               updateInfoContentText();
-              
+
               // On mobile, switch to CDE panel when clicking subcategory buttons
           } else{
               infoContent.classList.add("hidden");
@@ -3457,7 +3457,7 @@ function updateInfoContentText() {
               if (window.innerWidth < 769) {
                   container.classList.add('active');
                   var pagetop = document.querySelector(".sub-page-banner-box");
-                  pagetop.classList.add("min")                  
+                  pagetop.classList.add("min")
               } else {
               info_container.classList.add("active")
               }
@@ -3577,7 +3577,7 @@ menuIconBox.addEventListener('click', function() {
       nonMainElements.push(L);
     }
   });
-  
+
   var sheet = document.querySelectorAll(".ADTsheet.selected");
   const classlist = ["ACT","ACTN","ACTY"];
     if(window.innerWidth < 769) {
@@ -3592,7 +3592,7 @@ menuIconBox.addEventListener('click', function() {
     var daughter = currentel.firstElementChild;
     var sister = daughter.nextElementSibling;
     el.classList.remove("selected");
-    
+
     el.querySelectorAll(".Q").forEach(ele =>{
       ele.classList.remove("open");
       if(ele == el.firstElementChild){
@@ -3602,45 +3602,45 @@ menuIconBox.addEventListener('click', function() {
         sister.classList.add("open");
       }
     });
-    
+
     el.querySelectorAll(".slider").forEach(el1 =>{
       el1.classList.remove('o','yes','no');
     });
-    
+
     el.querySelectorAll(".dispobox.Yikes").forEach(el2 =>{
       el2.classList.remove("open");
     });
-    
+
     el.querySelectorAll(".dispobox.Nah").forEach(el3 =>{
       el3.classList.remove("open");
     });
-    
+
     el.querySelectorAll(".close").forEach(el4 =>{
       var b = el4.closest(".Q");
       var c = b.querySelector(".dispobox.Yikes");
       var d = c.querySelector(".justbox");
-      
+
       if(b.querySelector(".dispobox.Nah") == null){
         // Do nothing
       } else {
         var e = b.querySelector(".dispobox.Nah");
         e.querySelector(".justbox").classList.remove("open");
-      }  
-      
+      }
+
       d.classList.remove("open");
       par = el4.parentElement;
       grandpar = par.parentElement;
-      
+
       if(grandpar.classList.contains("back2")){
         var back = b.querySelector(".back2");
       } else {
         var back = b.querySelector(".back1");
       }
-      
+
       back.classList.remove("opened");
       b.querySelector(".front").classList.remove("closed");
     });
-  });  
+  });
   // Navigation logic based on iteration count
   if(iteration > 0){
     // If there are non-main elements with place-left class
@@ -3651,7 +3651,7 @@ menuIconBox.addEventListener('click', function() {
         ele.classList.remove("place-left");
         ele.classList.remove("active");
       });
-      
+
       // Find which element should be active based on hierarchy
       // This assumes the last element in the array is the deepest in navigation
       const elementToActivate = nonMainElements[nonMainElements.length - 1];
@@ -3663,11 +3663,11 @@ menuIconBox.addEventListener('click', function() {
     sels.forEach(ele => {
       ele.classList.remove("active");
     });
-    
+
     // Reset to main view
     main.classList.remove("place-left");
     main.classList.add("active");
-  }               
+  }
   updateMenuIcon();
   updateInfoContentText();
 });
@@ -3677,23 +3677,23 @@ justbuttons.forEach(function(justbutton) {
   justbutton.addEventListener("click", () => {
     var c = justbutton.closest(".dispobox");
     var back;
-    
+
     if (c.classList.contains("Yikes")) {
       back = justbutton.closest(".Q").querySelector(".back1");
     } else {
       back = justbutton.closest(".Q").querySelector(".back2");
     }
-    
+
     var front = justbutton.closest(".Q").querySelector(".front");
     var justtarget = back.querySelector(".just")
-    var just = back.querySelector(".just ul"); 
+    var just = back.querySelector(".just ul");
     back.classList.toggle("opened");
-    front.classList.toggle("closed"); 
+    front.classList.toggle("closed");
     c.querySelector(".justbox").classList.toggle("open");
-    
+
     var border = c.querySelector(".dispobar");
     const style = getComputedStyle(border);
-    const backgroundcolor = style.backgroundColor;    
+    const backgroundcolor = style.backgroundColor;
     back.style.backgroundColor = backgroundcolor;
   });
 });
@@ -3778,7 +3778,7 @@ btns.forEach(function(currentbtn){
         })
         close.forEach(tag =>{
           tag.style.color = text
-        })        
+        })
         if(back1){
           back1.style.color = text
         }
@@ -3788,13 +3788,13 @@ btns.forEach(function(currentbtn){
         sub3.style.backgroundColor = color
         sub3.style.color = text
         box.style.color = text
-        note_content.style.color = text        
+        note_content.style.color = text
         sub3.classList.remove("closed")
-        if (Qs.classList.contains("ACTN") || 
-    Qs.classList.contains("ACTY") || 
-    Qs.classList.contains("ACT") || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTY")) || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTN")) || 
+        if (Qs.classList.contains("ACTN") ||
+    Qs.classList.contains("ACTY") ||
+    Qs.classList.contains("ACT") ||
+    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTY")) ||
+    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTN")) ||
     (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACT"))) {sub3.classList.remove("keyed")
         sub3.classList.add("closed")
         }else{
@@ -3837,7 +3837,7 @@ btns.forEach(function(currentbtn){
         })
         close.forEach(tag =>{
           tag.style.color = text
-        })        
+        })
         if(back1){
           back1.style.color = text
         }
@@ -3848,14 +3848,14 @@ btns.forEach(function(currentbtn){
         dispo.setAttribute('fill', text)
         sub3.style.color = text
         box.style.color = text
-        note_content.style.color = text      
+        note_content.style.color = text
           nah.classList.add("open")
           sub3.classList.remove("closed")
         }
         justify()
         CheckTopMarker()
     }
-  }) 
+  })
 })
 
 
@@ -3960,7 +3960,7 @@ function justify(){
           Q3.classList.add("open")
         }else{
           if(Q3){Q3.classList.add("open")}
-          
+
         }
       }
     }
@@ -4035,11 +4035,11 @@ function justify(){
       if (window.sectionTwoObserver) {
           window.sectionTwoObserver.disconnect();
       }
-      
+
       const sectionTwoOptions = {
           threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
       };
-      
+
       window.sectionTwoObserver = new IntersectionObserver(function(entries, observer) {
           entries.forEach(entry => {
               if (!entry.isIntersecting) {
@@ -4056,7 +4056,7 @@ function justify(){
       }, sectionTwoOptions);
       window.sectionTwoObserver.observe(sectionTwo);
   }
-  
+
 }
 
 function CheckTopMarker(){
@@ -4069,7 +4069,7 @@ function CheckTopMarker(){
       const TopMarkerOptions = {
           threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
       };
-      
+
       window.TopMarkerObserver = new IntersectionObserver(function(entries, observer) {
           entries.forEach(entry => {
               if (!entry.isIntersecting) {
@@ -4101,8 +4101,8 @@ function checkmedmarker() {
   const medsheet = document.querySelector(".medsheet");
   const menu_banner = document.querySelector(".menu-banner-label");
   const med_banner = document.querySelector(".med_banner");
-  
-  
+
+
   if (!medsheet.classList.contains("open")) {
     // If medsheet is not open, disconnect observer if it exists
     if (MedMarkerObserver) {
@@ -4111,17 +4111,17 @@ function checkmedmarker() {
     }
     return;
   }
-  
+
   // Disconnect any existing observer
   if (MedMarkerObserver) {
     MedMarkerObserver.disconnect();
   }
-  
+
   // Set up the Intersection Observer
   const MedMarkerOptions = {
     threshold: 0.1 // Adjust as needed
   };
-  
+
   MedMarkerObserver = new IntersectionObserver(function(medentries, observer) {
     medentries.forEach(medentry => {
       // Only execute if window width is less than 768px
@@ -4134,7 +4134,7 @@ function checkmedmarker() {
       }
     });
   }, MedMarkerOptions);
-  
+
   MedMarkerObserver.observe(MedMarker);
 }
 
@@ -4144,9 +4144,9 @@ function setupMedsheetObserver() {
   if (!medsheet) {
     return;
   }
-  
+
   const config = { attributes: true, attributeFilter: ['class'] };
-  
+
   const medsheetObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.attributeName === 'class') {
@@ -4161,7 +4161,7 @@ function setupMedsheetObserver() {
       }
     });
   });
-  
+
   medsheetObserver.observe(medsheet, config);
 }
 
@@ -4169,7 +4169,7 @@ function setupMedsheetObserver() {
 document.addEventListener('DOMContentLoaded', function() {
   // Set up the medsheet observer
   setupMedsheetObserver();
-  
+
 });
 
 
@@ -4187,7 +4187,7 @@ function clearboard(){
   CLP.classList.remove("open")
   CLP.querySelector(".slider").classList.remove("o","yes","no")
   if(CLP.querySelector(".dispobox.Yikes") == null){null}else{CLP.querySelector(".dispobox.Yikes").classList.remove("open")}
-  if(CLP.querySelector(".dispobox.Nah") == null){null}else{CLP.querySelector(".dispobox.Nah").classList.remove("open")}  
+  if(CLP.querySelector(".dispobox.Nah") == null){null}else{CLP.querySelector(".dispobox.Nah").classList.remove("open")}
   CLP = CLP.nextElementSibling
   }
   if(classnames.some(classnames => first.classList.contains(classnames))){
@@ -4205,16 +4205,18 @@ contentClosing.forEach(function(el){
                 if(box.classList.contains("closed")){
                         box.classList.remove("closed")
                         son.classList.remove("closed")
+                        el.setAttribute('aria-expanded', 'true');
                 }else{
                         box.classList.add("closed")
                         son.classList.add("closed")
+                        el.setAttribute('aria-expanded', 'false');
                 }
-        
+
         })
 })
 
 
-// submitlabel to copy the note shows up with all the checkmarks. 
+// submitlabel to copy the note shows up with all the checkmarks.
 const panel = document.querySelector(".bg4");
 const copyButton = document.querySelector(".copy-button");
 const checkbox1 = document.getElementById("checkbox1");
@@ -4245,7 +4247,7 @@ copyButton.addEventListener('click', () => {
       panel.classList.add("copied");
       panel.classList.remove("keyed");
       writenote()
-    } 
+    }
 });
 // Close panel when clicking outside
 document.addEventListener('click', (e) => {
@@ -4273,7 +4275,7 @@ finalbutton.addEventListener("click", ()=>{
   panel.classList.remove("copied")
   helper.classList.remove("faded")
 }, 2000);
-  
+
 })
 
 
@@ -4314,7 +4316,7 @@ window.addEventListener('resize', function() {
                 if(!pagetop.classList.contains("min")){
                 pagetop.classList.add("min")
                 }
-            }else 
+            }else
               if(app_state === "subcategory" || app_state === "main"){
               container.classList.remove("active")
             }
@@ -4402,7 +4404,7 @@ if(document.querySelector("#checkbox1").checked === true){
       "Q3" : ["3."],
       "Q4" : ["4."],
       "Q5" : ["5."],
-      "Q6" : ["6."]     
+      "Q6" : ["6."]
     }
     var slider = current.querySelector(".slider")
     var Ay = current.querySelector(".Aa.Y")
@@ -4489,7 +4491,7 @@ if(document.querySelector("#checkbox1").checked === true){
   ref_container.append(ref_title)
   Geeks.push("","",lastopen_div_text)
   }
-  }  
+  }
 
   const Geekssep = Geeks.join("\n")
   navigator.clipboard.writeText(Geekssep)
@@ -5066,11 +5068,11 @@ med_btns.forEach(function(med_btn){
 
 function updateCategoryContent(categoryIndex, contentArray) {
     const contentContainers = document.querySelectorAll('.med_content_content');
-    
+
     if (contentContainers[categoryIndex]) {
         // Clear previous content
         contentContainers[categoryIndex].innerHTML = '';
-        
+
         // Add new content
         // Optimization: Use DocumentFragment to batch DOM insertions
         const fragment = document.createDocumentFragment();
@@ -5359,6 +5361,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (el.classList.contains('dispo-icon') && !el.hasAttribute('aria-label')) {
                 el.setAttribute('aria-label', 'View decision details');
+            }
+
+            // Add aria-expanded for collapsible sections
+            if (el.classList.contains('contbox-top')) {
+                var dad = el.closest(".sub-page-pre");
+                if (dad) {
+                    var box = dad.querySelector(".contbox-content");
+                    if (box && box.classList.contains("closed")) {
+                        el.setAttribute('aria-expanded', 'false');
+                    } else {
+                        el.setAttribute('aria-expanded', 'true');
+                    }
+                }
             }
 
             // Avoid adding multiple listeners if run multiple times
