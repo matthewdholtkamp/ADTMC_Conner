@@ -1,3 +1,3 @@
-## 2024-05-23 - Layout Thrashing in Initialization Loops
-**Learning:** Using `innerText` inside a loop over ~150 DOM elements during `DOMContentLoaded` caused significant layout thrashing (forced reflows), blocking the main thread for ~70ms. This is because `innerText` requires the browser to calculate the layout to determine visibility.
-**Action:** Prefer `textContent` over `innerText` when reading text from DOM elements in loops, especially during initialization, unless visibility awareness is explicitly required. Switching to `textContent` reduced the operation time to ~1.7ms (42x improvement).
+## 2024-05-23 - Event Delegation for Initialization Performance
+**Learning:** Attaching `keydown` event listeners to over 1200 interactive elements in a loop during initialization caused measurable overhead.
+**Action:** Replaced individual listeners with a single delegated event listener on `document` that checks `event.target.closest(selector)`. This reduces memory usage and speeds up `DOMContentLoaded` execution while preserving accessibility behavior (Enter/Space to click).

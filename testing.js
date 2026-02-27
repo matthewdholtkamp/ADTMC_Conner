@@ -5361,20 +5361,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.setAttribute('aria-label', 'View decision details');
             }
 
-            // Avoid adding multiple listeners if run multiple times
-            if (!el.dataset.keyboardListenerAttached) {
-                el.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault(); // Prevent scrolling for Space
-                        // e.stopPropagation(); // Caution with stopPropagation, but might be needed if nested.
-                        // For now, let's leave it out unless needed to avoid side effects.
-                        el.click();
-                    }
-                });
-                el.dataset.keyboardListenerAttached = 'true';
-            }
         });
     }
+
+    // Delegated event listener for keyboard navigation (Enter/Space)
+    // Optimization: Use event delegation instead of attaching 1200+ listeners
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const accessibleSelectors = [
+                '.catbtn',
+                '.medbtn',
+                '.contbox-top',
+                '.close',
+                '.dispo-icon',
+                '.Aa',
+                '.bg4',
+                '.main_menu_choice',
+                '.submitbottom_button'
+            ];
+
+            const selector = accessibleSelectors.join(', ');
+            const target = e.target.closest(selector);
+
+            if (target) {
+                e.preventDefault(); // Prevent scrolling for Space
+                target.click();
+            }
+        }
+    });
 
     initializeAccessibility();
 });
