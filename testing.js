@@ -3529,12 +3529,13 @@ function updateInfoContentText() {
                     var ul = document.createElement("ul");
                     ul.classList.add("made")
                     ul.innerHTML = ""
-                    for (i = 0; i <= ele.length - 1; i++) {
+                    const fragment = document.createDocumentFragment();
+                    for (let i = 0; i <= ele.length - 1; i++) {
                       var li = document.createElement('li')
-                      li.innerHTML = ""
                       li.innerHTML = ele[i]
-                      ul.appendChild(li)
+                      fragment.appendChild(li)
                     }
+                    ul.appendChild(fragment)
                     container.appendChild(ul)
                   }
                 }
