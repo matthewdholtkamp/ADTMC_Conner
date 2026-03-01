@@ -3691,6 +3691,10 @@ justbuttons.forEach(function(justbutton) {
     front.classList.toggle("closed"); 
     c.querySelector(".justbox").classList.toggle("open");
     
+    // Toggle aria-expanded
+    var isExpanded = justbutton.getAttribute("aria-expanded") === "true";
+    justbutton.setAttribute("aria-expanded", !isExpanded);
+
     var border = c.querySelector(".dispobar");
     const style = getComputedStyle(border);
     const backgroundcolor = style.backgroundColor;    
@@ -3707,8 +3711,10 @@ closers.forEach(function(currentcloser){
     if(b.querySelector(".dispobox.Nah")==null){null}else{
     var e= b.querySelector(".dispobox.Nah")
     e.querySelector(".justbox").classList.remove("open")
+    if(e.querySelector(".dispo-icon")) e.querySelector(".dispo-icon").setAttribute("aria-expanded", "false");
     }
     d.classList.remove("open")
+    if(c.querySelector(".dispo-icon")) c.querySelector(".dispo-icon").setAttribute("aria-expanded", "false");
     par = currentcloser.parentElement
     grandpar = par.parentElement
     if(grandpar.classList.contains("back2")){
@@ -4205,9 +4211,11 @@ contentClosing.forEach(function(el){
                 if(box.classList.contains("closed")){
                         box.classList.remove("closed")
                         son.classList.remove("closed")
+                        el.setAttribute("aria-expanded", "true")
                 }else{
                         box.classList.add("closed")
                         son.classList.add("closed")
+                        el.setAttribute("aria-expanded", "false")
                 }
         
         })
@@ -5359,6 +5367,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (el.classList.contains('dispo-icon') && !el.hasAttribute('aria-label')) {
                 el.setAttribute('aria-label', 'View decision details');
+            }
+            if (el.classList.contains('dispo-icon')) {
+                el.setAttribute('aria-expanded', 'false');
+            }
+            if (el.classList.contains('contbox-top')) {
+                var dad = el.closest(".sub-page-pre");
+                if (dad) {
+                    var box = dad.querySelector(".contbox-content");
+                    if (box) {
+                        el.setAttribute('aria-expanded', box.classList.contains("closed") ? 'false' : 'true');
+                    }
+                }
             }
 
             // Avoid adding multiple listeners if run multiple times
