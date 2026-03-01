@@ -3321,24 +3321,24 @@ const link1 ={
   function updateMenuIcon() {
       if (main.classList.contains('active')) {
         showMenu()
-        menu_banner.innerHTML = "ADTMC 2.5"
+        menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Avoid HTML parser overhead
       } else if(med_bar.classList.contains("active")){
         showClose()
-        menu_banner.innerHTML = "ADTMC Medications List"
+        menu_banner.textContent = "ADTMC Medications List" // ⚡ Bolt: Avoid HTML parser overhead
       }else {
         showArrow()
-        menu_banner.innerHTML = "ADTMC 2.5"
+        menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Avoid HTML parser overhead
       }
   }
 
   let currentMenuText = "ADTMC 2.5"
   function updateMenuText(){
     if(main.classList.contains("active")){
-      menu_banner.innerText = "ADTMC 2.5"
+      menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Use textContent for better performance
     } else if(med_bar.classList.contains("active")){
-      menu_banner.innerHTML = "ADTMC Medications List"
+      menu_banner.textContent = "ADTMC Medications List" // ⚡ Bolt: Avoid HTML parser overhead
     } else {
-      menu_banner.innerText = "ADTMC 2.5"
+      menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Use textContent for better performance
     }
   }
 
@@ -3452,7 +3452,7 @@ function updateInfoContentText() {
               var titles = looking +"<br>"+looking2
               var subtitle = looking + " "+looking2
               var subtitlebox = document.querySelector(".sub-page-banner")
-              subtitlebox.innerText = subtitle
+              subtitlebox.textContent = subtitle // ⚡ Bolt: Use textContent for better performance
               infoTitle.innerHTML = titles
               if (window.innerWidth < 769) {
                   container.classList.add('active');
@@ -3528,11 +3528,11 @@ function updateInfoContentText() {
                     const container = JERK[position]
                     var ul = document.createElement("ul");
                     ul.classList.add("made")
-                    ul.innerHTML = ""
+                    ul.textContent = ""
                     for (i = 0; i <= ele.length - 1; i++) {
                       var li = document.createElement('li')
-                      li.innerHTML = ""
-                      li.innerHTML = ele[i]
+                      li.textContent = ""
+                      li.textContent = ele[i]
                       ul.appendChild(li)
                     }
                     container.appendChild(ul)
@@ -3558,7 +3558,7 @@ menuIconBox.addEventListener('click', function() {
     medsheet.classList.remove("open")
     if(main.classList.contains("active")){
         main_menu.classList.toggle("active")
-        main_menu.querySelector("#section_tag").innerText = "MEDICATIONS LIST"
+        main_menu.querySelector("#section_tag").textContent = "MEDICATIONS LIST" // ⚡ Bolt: Use textContent for better performance
     }
   const subpage = document.querySelector(".sub-page");
   subpage.classList.remove("open");
@@ -4075,15 +4075,15 @@ function CheckTopMarker(){
               if (!entry.isIntersecting) {
                   if(window.innerWidth<768){
                   if (document.querySelector(".sub-page.open")) {
-                    var sub_page_banner = document.querySelector(".sub-page-banner").innerText
-                    menu_banner.innerHTML = sub_page_banner
+                    var sub_page_banner = document.querySelector(".sub-page-banner").textContent
+                    menu_banner.textContent = sub_page_banner
                     console.log("this works")
                       // Stop observing after handling this event
                       observer.disconnect();
                       window.TopMarkerObserver = null;
                   }}
               } else if(entry.isIntersecting){
-                menu_banner.innerHTML = "ADTMC 2.5"
+                menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Avoid HTML parser overhead
               }
           });
       }, TopMarkerOptions);
@@ -4127,9 +4127,9 @@ function checkmedmarker() {
       // Only execute if window width is less than 768px
       if (window.innerWidth < 768) {
         if (!medentry.isIntersecting) {
-          menu_banner.innerText = med_banner.innerHTML
+          menu_banner.textContent = med_banner.textContent
         } else {
-          menu_banner.innerHTML = "ADTMC Medications List";
+          menu_banner.textContent = "ADTMC Medications List" // ⚡ Bolt: Avoid HTML parser overhead;
         }
       }
     });
@@ -4357,12 +4357,12 @@ const a = link1[sheetid]
       JY15 = a["RF"]
       ]
 const newday = new Date()
-date.innerText = newday
-const date_for_text = date.innerText
+date.textContent = newday
+const date_for_text = date.textContent
 var subtitle = document.querySelector(".SOAPtitle")
 var title = document.querySelector(".sub-page-banner")
-var title_text = title.innerText
-subtitle.innerText = title_text
+var title_text = title.textContent
+subtitle.textContent = title_text
 
 const Geeks = []
 Geeks.push("SCREENED IAW ADTMC MEDCOM PAM 40-7-21",date_for_text,"",title_text)
@@ -4454,9 +4454,9 @@ if(document.querySelector("#checkbox1").checked === true){
           var dispo = document.createElement("div")
           dispo.classList.add("SOAPdispo")
           dispo.classList.add("submitmade")
-          dispo.innerText = thestufflabel
+          dispo.textContent = thestufflabel
           if(action_card){
-            dispo.innerText = thestufflabel + '\n' + action_card.innerText
+            dispo.textContent = thestufflabel + '\n' + action_card.innerText
           }
           submissionFragment.append(dispo)
           Geeks.push("",dispo.innerText)
@@ -4479,13 +4479,13 @@ if(document.querySelector("#checkbox1").checked === true){
   if(lastopen.classList.contains("Yikes")){
   const lastopen_div = last.querySelector(".back1")
   const lastopen_div_text = lastopen_div.innerText
-  ref_title.innerText = lastopen_div_text
+  ref_title.textContent = lastopen_div_text
   ref_container.append(ref_title)
   Geeks.push("","",lastopen_div_text)
   }else{
   const lastopen_div = last.querySelector(".back2")
   const lastopen_div_text = lastopen_div.innerText
-  ref_title.innerText = lastopen_div_text
+  ref_title.textContent = lastopen_div_text
   ref_container.append(ref_title)
   Geeks.push("","",lastopen_div_text)
   }
@@ -5050,9 +5050,9 @@ med_btns.forEach(function(med_btn){
       med_btn.addEventListener("click", () => {
         const med_id = med_btn.id
         const medicationData = medboxes[med_id];
-        const med_title = med_btn.innerText
+        const med_title = med_btn.textContent
         const banner = document.querySelector(".med_banner")
-        banner.innerText = med_title
+        banner.textContent = med_title
         container.classList.add('active');
         if(banner.classList.contains("open")){null}else{medsheet.classList.add("open")}
         // Iterate through each category item
@@ -5215,7 +5215,7 @@ if (searchInput) {
                 div.style.borderBottom = '1px solid #eee';
                 div.style.cursor = 'pointer';
                 div.style.color = 'var(--TextColor1)';
-                div.innerText = item.text;
+                div.textContent = item.text; // ⚡ Bolt: Prevent layout thrashing in search result rendering
 
                 div.addEventListener('keydown', (e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
