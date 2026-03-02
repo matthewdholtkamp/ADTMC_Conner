@@ -4467,7 +4467,7 @@ if(document.querySelector("#checkbox1").checked === true){
             dispo.textContent = thestufflabel + '\n' + action_card.innerText
           }
           submissionFragment.append(dispo)
-          Geeks.push("",dispo.innerText)
+          Geeks.push("",dispo.textContent) // ⚡ Bolt: Use textContent for newly created elements to prevent layout thrashing
         }
       })
       a++
