@@ -17,3 +17,7 @@
 ## 2026-02-23 - Skip to Content for Keyboard Users
 **Learning:** Large monolithic pages with sticky headers or extensive navigation need a "Skip to Content" link to prevent keyboard fatigue. Adding `tabindex="-1"` to the target container is essential for the focus to actually move and stick in some browsers/contexts.
 **Action:** Always add `tabindex="-1"` to the target of a skip link if it is not an inherently focusable element.
+
+## 2026-03-01 - Interactive Element States for Screen Readers
+**Learning:** For screen readers to accurately represent the UI, toggleable interactive elements like accordions (`.contbox-top`) and disclosure buttons (`.dispo-icon`) must utilize the `aria-expanded` attribute. Its value must be kept in sync with the element's actual visual state via JavaScript (`true` when open, `false` when closed).
+**Action:** When creating or modifying toggleable components, ensure `aria-expanded` is initialized properly on load and dynamically updated within the component's state-toggling logic (event listeners).
