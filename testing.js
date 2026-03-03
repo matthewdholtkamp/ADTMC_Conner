@@ -3752,6 +3752,11 @@ btns.forEach(function(currentbtn){
     const at = dispo.attributes
     //if the slider is not active make it active
     if(!slider.classList.contains("o")){slider.classList.toggle("o")}
+
+    // Update aria-pressed for accessibility
+    Qs.querySelectorAll(".Aa").forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+    currentbtn.setAttribute('aria-pressed', 'true');
+
     //if yes - close the no dispobox, open the yes dispobox, and hide the note button
     if(currentbtn.classList.contains("Y")){
       if(Qs.querySelector(".dispobox.Nah") == null){null}else{
@@ -5379,6 +5384,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         el.setAttribute('aria-expanded', box.classList.contains("closed") ? 'false' : 'true');
                     }
                 }
+            }
+            if (el.classList.contains('Aa')) {
+                el.setAttribute('aria-pressed', 'false');
             }
 
         });

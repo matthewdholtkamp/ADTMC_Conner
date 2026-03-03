@@ -4,7 +4,7 @@ def verify_search_accessibility():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        page.goto("http://localhost:8080/index.html")
+        page.goto("http://localhost:8000/index.html")
 
         # 1. Verify initial state
         search_input = page.get_by_role("combobox", name="Search content")

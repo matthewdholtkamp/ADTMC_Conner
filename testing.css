@@ -375,6 +375,12 @@ li {
     overflow: hidden;
     align-items: center;
     cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.catbtn:hover, .subcatbtn:hover, .medbtn:hover {
+    transform: scale(1.01);
+    background-color: var(--Backgroundlightgray);
 }
 
 .category-text-box {
@@ -635,7 +641,13 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   border: none;
   border-radius: 10px;
-   z-index:2
+  z-index: 2;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.Aa:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 
