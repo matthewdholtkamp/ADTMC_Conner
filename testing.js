@@ -3732,137 +3732,138 @@ closers.forEach(function(currentcloser){
 })
 
 //question yes-no slider action + justify() at end
-var btns = document.querySelectorAll(".Aa");
-btns.forEach(function(currentbtn){
-  currentbtn.addEventListener("click",()=>{
-    //name variables based on button
-    var Qs = currentbtn.closest(".Q");
-    var ADT = Qs.closest(".ADTsheet.selected")
-    var frontcard = Qs.querySelector(".dispobar")
-    var slider = Qs.querySelector(".slider");
-    var dispobox = Qs.querySelector(".dispobox.Yikes");
-    var dispo = dispobox.querySelector(".dispo-icon")
-    var box = document.querySelector(".SOAPbox")
-    var note_content = document.querySelector(".item-box")
-    var note_break = document.querySelector(".SOAPbreak")
-    var back1 = Qs.querySelector(".back1")
-    var back2 = Qs.querySelector(".back2")
-    var close = Qs.querySelectorAll(".close i")
-    var close_content = Qs.querySelectorAll(".just li")
-    const at = dispo.attributes
-    //if the slider is not active make it active
-    if(!slider.classList.contains("o")){slider.classList.toggle("o")}
-    //if yes - close the no dispobox, open the yes dispobox, and hide the note button
-    if(currentbtn.classList.contains("Y")){
-      if(Qs.querySelector(".dispobox.Nah") == null){null}else{
-        var nah = Qs.querySelector(".dispobox.Nah");
-        nah.classList.remove("open");
-        sub3.classList.remove("keyed");
-        sub3.classList.add("closed")
-      }
-      slider.classList.add("yes")
-      slider.classList.remove("no");
-    //styling
-      var border = Qs.querySelector(".dispobar");
-        dispobox.classList.add("open")
-        const style = getComputedStyle(border);
-        const color = style.backgroundColor
-        const text = style.color
-        slider.style.backgroundColor = color;
-        slider.style.color = text
-        dispo.style.backgroundColor = color;
-        dispo.style.color = text
-        bottombar.style.backgroundColor = color
-        bottombar.style.color = text
-        note_break.style.backgroundColor = text
-        tags.forEach(tag =>{
-          tag.style.accentColor = color
-          tag.style.color = text
-        })
-        close_content.forEach(tag =>{
-          tag.style.color = text
-        })
-        close.forEach(tag =>{
-          tag.style.color = text
-        })        
-        if(back1){
-          back1.style.color = text
-        }
-        if(back2){
-          back2.style.color = text
-        }
-        sub3.style.backgroundColor = color
-        sub3.style.color = text
-        box.style.color = text
-        note_content.style.color = text        
-        sub3.classList.remove("closed")
-        if (Qs.classList.contains("ACTN") || 
-    Qs.classList.contains("ACTY") || 
-    Qs.classList.contains("ACT") || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTY")) || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTN")) || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACT"))) {sub3.classList.remove("keyed")
-        sub3.classList.add("closed")
-        }else{
-      }
-        justify()
-        CheckTopMarker()
-      }
-    if(currentbtn.classList.contains("N")){
-      slider.classList.add("no")
-      slider.classList.remove("yes");
-      dispobox.classList.remove("open");
-      if(Qs.querySelector(".dispobox.Nah") == null){
-        slider.removeAttribute('style')
-        sub3.classList.remove("keyed");
-        sub3.classList.add("closed")
-      }
-        else{
-          var nah = Qs.querySelector(".dispobox.Nah");
-          var nahbar = nah.querySelector(".dispobar")
-          const style = getComputedStyle(nahbar);
-          const color = style.backgroundColor
-          const text = style.color
-          var d = nah.querySelector(".iconbutton")
-          d.style.backgroundColor = color;
-          sub3.style.backgroundColor = color
-        slider.style.backgroundColor = color
-        slider.style.color = text
-        dispo.style.backgroundColor = color;
-        dispo.setAttribute('fill', text)
-        dispo.style.color = text
-        bottombar.style.backgroundColor = color
-        bottombar.style.color = text
-        note_break.style.backgroundColor = text
-        tags.forEach(tag =>{
-          tag.style.accentColor = color
-          tag.style.color = text
-        })
-        close_content.forEach(tag =>{
-          tag.style.color = text
-        })
-        close.forEach(tag =>{
-          tag.style.color = text
-        })        
-        if(back1){
-          back1.style.color = text
-        }
-        if(back2){
-          back2.style.color = text
-        }
-        sub3.style.backgroundColor = color
-        dispo.setAttribute('fill', text)
-        sub3.style.color = text
-        box.style.color = text
-        note_content.style.color = text      
-          nah.classList.add("open")
-          sub3.classList.remove("closed")
-        }
-        justify()
-        CheckTopMarker()
+// ⚡ Bolt: Use event delegation instead of attaching click listeners to hundreds of .Aa elements
+document.addEventListener("click", function(event) {
+  var currentbtn = event.target.closest(".Aa");
+  if (!currentbtn) return;
+
+  //name variables based on button
+  var Qs = currentbtn.closest(".Q");
+  var ADT = Qs.closest(".ADTsheet.selected");
+  var frontcard = Qs.querySelector(".dispobar");
+  var slider = Qs.querySelector(".slider");
+  var dispobox = Qs.querySelector(".dispobox.Yikes");
+  var dispo = dispobox.querySelector(".dispo-icon");
+  var box = document.querySelector(".SOAPbox");
+  var note_content = document.querySelector(".item-box");
+  var note_break = document.querySelector(".SOAPbreak");
+  var back1 = Qs.querySelector(".back1");
+  var back2 = Qs.querySelector(".back2");
+  var close = Qs.querySelectorAll(".close i");
+  var close_content = Qs.querySelectorAll(".just li");
+  const at = dispo.attributes;
+  //if the slider is not active make it active
+  if(!slider.classList.contains("o")){slider.classList.toggle("o")}
+  //if yes - close the no dispobox, open the yes dispobox, and hide the note button
+  if(currentbtn.classList.contains("Y")){
+    if(Qs.querySelector(".dispobox.Nah") == null){null}else{
+      var nah = Qs.querySelector(".dispobox.Nah");
+      nah.classList.remove("open");
+      sub3.classList.remove("keyed");
+      sub3.classList.add("closed");
     }
-  }) 
-})
+    slider.classList.add("yes");
+    slider.classList.remove("no");
+  //styling
+    var border = Qs.querySelector(".dispobar");
+      dispobox.classList.add("open");
+      const style = getComputedStyle(border);
+      const color = style.backgroundColor;
+      const text = style.color;
+      slider.style.backgroundColor = color;
+      slider.style.color = text;
+      dispo.style.backgroundColor = color;
+      dispo.style.color = text;
+      bottombar.style.backgroundColor = color;
+      bottombar.style.color = text;
+      note_break.style.backgroundColor = text;
+      tags.forEach(tag =>{
+        tag.style.accentColor = color;
+        tag.style.color = text;
+      });
+      close_content.forEach(tag =>{
+        tag.style.color = text;
+      });
+      close.forEach(tag =>{
+        tag.style.color = text;
+      });
+      if(back1){
+        back1.style.color = text;
+      }
+      if(back2){
+        back2.style.color = text;
+      }
+      sub3.style.backgroundColor = color;
+      sub3.style.color = text;
+      box.style.color = text;
+      note_content.style.color = text;
+      sub3.classList.remove("closed");
+      if (Qs.classList.contains("ACTN") ||
+  Qs.classList.contains("ACTY") ||
+  Qs.classList.contains("ACT") ||
+  (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTY")) ||
+  (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTN")) ||
+  (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACT"))) {sub3.classList.remove("keyed");
+      sub3.classList.add("closed");
+      }else{
+    }
+      justify();
+      CheckTopMarker();
+    }
+  if(currentbtn.classList.contains("N")){
+    slider.classList.add("no");
+    slider.classList.remove("yes");
+    dispobox.classList.remove("open");
+    if(Qs.querySelector(".dispobox.Nah") == null){
+      slider.removeAttribute('style');
+      sub3.classList.remove("keyed");
+      sub3.classList.add("closed");
+    }
+      else{
+        var nah = Qs.querySelector(".dispobox.Nah");
+        var nahbar = nah.querySelector(".dispobar");
+        const style = getComputedStyle(nahbar);
+        const color = style.backgroundColor;
+        const text = style.color;
+        var d = nah.querySelector(".iconbutton");
+        d.style.backgroundColor = color;
+        sub3.style.backgroundColor = color;
+      slider.style.backgroundColor = color;
+      slider.style.color = text;
+      dispo.style.backgroundColor = color;
+      dispo.setAttribute('fill', text);
+      dispo.style.color = text;
+      bottombar.style.backgroundColor = color;
+      bottombar.style.color = text;
+      note_break.style.backgroundColor = text;
+      tags.forEach(tag =>{
+        tag.style.accentColor = color;
+        tag.style.color = text;
+      });
+      close_content.forEach(tag =>{
+        tag.style.color = text;
+      });
+      close.forEach(tag =>{
+        tag.style.color = text;
+      });
+      if(back1){
+        back1.style.color = text;
+      }
+      if(back2){
+        back2.style.color = text;
+      }
+      sub3.style.backgroundColor = color;
+      dispo.setAttribute('fill', text);
+      sub3.style.color = text;
+      box.style.color = text;
+      note_content.style.color = text;
+        nah.classList.add("open");
+        sub3.classList.remove("closed");
+      }
+      justify();
+      CheckTopMarker();
+  }
+});
 
 
 function justify(){
