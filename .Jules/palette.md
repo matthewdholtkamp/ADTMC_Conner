@@ -21,3 +21,7 @@
 ## 2026-03-01 - Interactive Element States for Screen Readers
 **Learning:** For screen readers to accurately represent the UI, toggleable interactive elements like accordions (`.contbox-top`) and disclosure buttons (`.dispo-icon`) must utilize the `aria-expanded` attribute. Its value must be kept in sync with the element's actual visual state via JavaScript (`true` when open, `false` when closed).
 **Action:** When creating or modifying toggleable components, ensure `aria-expanded` is initialized properly on load and dynamically updated within the component's state-toggling logic (event listeners).
+
+## 2026-03-03 - Accessible State for Custom Toggle Buttons
+**Learning:** When using custom `div` elements to create toggle groups (like Yes/No sliders) that rely on visual cues (e.g., a background slider) for their state, this state is completely invisible to screen readers. To make these accessible, the `aria-pressed` attribute must be used.
+**Action:** When creating or modifying custom toggle buttons, ensure `aria-pressed` is initialized to `false` and dynamically toggled to `true` on the selected element (and `false` on siblings) within the click event handler.
