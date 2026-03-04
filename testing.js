@@ -3607,6 +3607,10 @@ menuIconBox.addEventListener('click', function() {
       el1.classList.remove('o','yes','no');
     });
     
+    el.querySelectorAll(".Aa").forEach(elBtn => {
+      elBtn.setAttribute("aria-pressed", "false");
+    });
+
     el.querySelectorAll(".dispobox.Yikes").forEach(el2 =>{
       el2.classList.remove("open");
     });
@@ -3752,6 +3756,11 @@ btns.forEach(function(currentbtn){
     const at = dispo.attributes
     //if the slider is not active make it active
     if(!slider.classList.contains("o")){slider.classList.toggle("o")}
+
+    // Update aria-pressed states
+    Qs.querySelectorAll('.Aa').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+    currentbtn.setAttribute('aria-pressed', 'true');
+
     //if yes - close the no dispobox, open the yes dispobox, and hide the note button
     if(currentbtn.classList.contains("Y")){
       if(Qs.querySelector(".dispobox.Nah") == null){null}else{
@@ -4192,6 +4201,7 @@ function clearboard(){
   while(CLP){
   CLP.classList.remove("open")
   CLP.querySelector(".slider").classList.remove("o","yes","no")
+  CLP.querySelectorAll(".Aa").forEach(btn => btn.setAttribute('aria-pressed', 'false'))
   if(CLP.querySelector(".dispobox.Yikes") == null){null}else{CLP.querySelector(".dispobox.Yikes").classList.remove("open")}
   if(CLP.querySelector(".dispobox.Nah") == null){null}else{CLP.querySelector(".dispobox.Nah").classList.remove("open")}  
   CLP = CLP.nextElementSibling
@@ -5380,7 +5390,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
-
+            if (el.classList.contains('Aa')) {
+                el.setAttribute('aria-pressed', 'false');
+            }
         });
     }
 
