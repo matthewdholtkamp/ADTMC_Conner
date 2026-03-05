@@ -4249,15 +4249,18 @@ panel.addEventListener('click', () => {
     if (!panel.classList.contains("keyed") && !panel.classList.contains("copied")) {
         panel.classList.add("keyed");
         helper.classList.add("faded")
+        checkbox1.focus();
     }
 });
 
-copyButton.addEventListener('click', () => {
+copyButton.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent bubbling to panel
     if(panel.classList.contains("keyed")){
       bottombar.classList.add("open")
       panel.classList.add("copied");
       panel.classList.remove("keyed");
       writenote()
+      finalbutton.focus();
     } 
 });
 // Close panel when clicking outside

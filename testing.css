@@ -1697,7 +1697,8 @@ color: var(--TextColor1)
 .bg4:focus-visible,
 .main_menu_choice:focus-visible,
 .submitbottom_button:focus-visible,
-.search-result-item:focus-visible {
+.search-result-item:focus-visible,
+.copy-button:focus-visible {
     outline: 2px solid var(--Backgroundbluedark);
     outline-offset: 2px;
     z-index: 1000;

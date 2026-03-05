@@ -25,3 +25,7 @@
 ## 2026-03-03 - Accessible State for Custom Toggle Buttons
 **Learning:** When using custom `div` elements to create toggle groups (like Yes/No sliders) that rely on visual cues (e.g., a background slider) for their state, this state is completely invisible to screen readers. To make these accessible, the `aria-pressed` attribute must be used.
 **Action:** When creating or modifying custom toggle buttons, ensure `aria-pressed` is initialized to `false` and dynamically toggled to `true` on the selected element (and `false` on siblings) within the click event handler.
+
+## 2026-03-05 - Focus Management and Live Regions for Interactive Bottom Panels
+**Learning:** Expanding bottom panels that transition states visually (e.g., from collapsed to showing checkboxes, to showing a final confirmation) need active focus management so keyboard users don't lose their place or have to tab through the whole page again. Furthermore, dynamically displayed status text needs `role="status"` and `aria-live="polite"` to be announced.
+**Action:** Always call `.focus()` on the first actionable element (like a checkbox) when a panel expands, and `.focus()` on the next logical element (like a submit button) when the state advances. Add `role="status"` and `aria-live="polite"` directly to the HTML container of notification text that appears dynamically.
