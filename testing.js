@@ -2,9 +2,9 @@
 if ('serviceWorker' in navigator) {
   const swPath = '/test2/serviceWorker.js';
   const scope = '/test2/';
-  
+
   let registration;
-  
+
   // Function to check for content updates
   function checkForContentUpdates() {
     if (registration) {
@@ -20,25 +20,25 @@ if ('serviceWorker' in navigator) {
       });
     }
   }
-  
+
   // Register service worker
   navigator.serviceWorker.register(swPath, { scope: scope })
     .then(reg => {
       registration = reg;
       console.log('SW registered successfully with scope:', reg.scope);
-      
+
       // Check for content updates when page becomes visible
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') {
           checkForContentUpdates();
         }
       });
-      
+
       // Check for content updates on page load
       window.addEventListener('load', function() {
         checkForContentUpdates();
       });
-      
+
       // Listen for content update messages from service worker
       navigator.serviceWorker.addEventListener('message', event => {
         if (event.data.type === 'CONTENT_UPDATED') {
@@ -49,22 +49,22 @@ if ('serviceWorker' in navigator) {
           }
         }
       });
-      
+
       // Listen for controller change
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         console.log('New service worker activated, reloading page');
         window.location.reload();
       });
-      
+
       // If there's a waiting service worker, prompt user to update
       if (reg.waiting) {
         showUpdateNotification(reg.waiting);
       }
-      
+
       // Listen for updates
       reg.addEventListener('updatefound', () => {
         const newWorker = reg.installing;
-        
+
         newWorker.addEventListener('statechange', () => {
           if (newWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
@@ -77,14 +77,14 @@ if ('serviceWorker' in navigator) {
     .catch(error => {
       console.log('SW registration failed:', error);
     });
-  
+
   // Function to show update notification
   function showUpdateNotification(worker) {
     if (confirm('A new version is available. Update now?')) {
       worker.postMessage({ action: 'skipWaiting' });
     }
   }
-  
+
   // Manual update check function (can be called from a button)
   window.checkForUpdates = function() {
     if (registration) {
@@ -104,7 +104,7 @@ if ('serviceWorker' in navigator) {
     var infoContent = document.getElementById('infoContent');
     var infoLabel = document.querySelector(".subcategory-header")
 
-const  
+const
   A1DP1 =["DP1. Symptoms greater than 10 days, immunosuppression, inhaled steroid medications are related to diseases that are unlikely to go away without treatment. Hoarseness longer than 2 weeks requires a full laryngeal exam."],
   A1DP2 =["DP2. 4 questions that look at the chance of having a Group A Streptococcal (GAS) infection. If 3 of the questions are positive, there is 32% chance of having GAS and a rapid antigen test (RADT) should be performed. The RADT is effective for ruling out GAS in adults but some Soldiers with GAS are missed. Culture test is performed when the RADT is negative and Soldiers or their contacts are at higher risk for complications from a GAS infection. Culture generally takes 24-48 hours for the results to return."],
   A1DP3 =["Other protocols. Sore throat and hoarseness that are associated with a virus should be treated with minor-care. The other symptoms should be treated according to their associated protocols.","MCP for sore throat. A sore throat is often due to a viral infection. Minor-care consist of pain control, measures to decrease inflammation, getting plenty of rest and drinking plenty of fluids (water). Return for signs of the infection getting worse or progressing.","MCP for hoarseness. Hoarseness is often due to a virus or irritant. Minor-care consists of resting the vocal cords and avoidance of irritants (cigarette smoking, yelling, heartburn, post-nasal drip). This is a good opportunity to discuss the negative effects of tobacco use and encourage the Soldier to quit using tobacco, if applicable."],
@@ -119,7 +119,7 @@ const
   A1DDX = ['Viral Infections', 'Bacterial Infection', 'Meningitis', 'Neck Deep Tissue Infection', 'Candida infection', 'Strep Throat'],
   A2ACT1 = [],
   A2ACT2 = [],
-  A2ACT3 = [],  
+  A2ACT3 = [],
   A2DP1 = ["DP1. Signs of infection. All Soldiers with otitis media or moderate to severe otitis externa should be evaluated by a privileged provider to be considered for antibiotics."],
   A2DP2 = ["DP2. Vertigo requires an internal ear evaluation. Longer timeline and decreased hearing can be signs of a complication from an ear infection or alternate cause requiring a qualified provider evaluation."],
   A2DP3 = ["Mild otitis externa, temporal-mandibular joint (TMJ) dysfunction, and ear pain with normal exam should be treated with minor-care.","MCP for otitis externa. Soak wick of a cotton ball wick with OTC ear drops. Place in the ear for 24 hours while using the drops. Remove the cotton wick and continue drops for 1 week (3 days after the symptoms have resolved). Keep the ear canal dry. Use OTC ibuprofen as needed for pain. Return to clinic if not resolved in 1 week or worsening symptoms to include pain or fever.","MCP for TMJ is another common cause of pain around the ear. Evaluation includes seeing if the pain increases with opening and closing the jaw while placing the finger on the anterior inside of the ear to feel the joint. Ensure pain is not related to the heart. Use OTC ibuprofen for inflammation and pain. Refer to dental if history of teeth grinding. Instruct on avoidance of triggers (excessive chewing, chewing gum). Home therapy is jaw isometric exercises: jaw is open 1 inch and jaw is pushed 1) down against a loosely fisted hand and 2) forward against a hand for 5 seconds each, each set is repeated 5 times per session with 3 sessions per day. Return if not improving within three days."],
@@ -341,7 +341,7 @@ const
   B10GEN = ["pg. 47-48: ","Common anterior foot pains include around the big toe (bunion, sprain, arthritis, sesamoiditis, ingrown toenail, subungual hematoma) and below the 2nd and 3rd metatarsals (metatarsalgia, Morton’s neuroma, and plantar wart)."],
   B10MEDCOM = ["Initial Management of Fractures/Spinal Injury pg.69 (2)(d)"],
   B10STP1 = ["Subject Area 7: Musculoskeletal. Treat Common Musculoskeletal. Disorders. 081-833-0222 ","Subject Area 7: Musculoskeletal. Apply a Rigid Splint. 081-833-0263 ","Subject Area 7: Musculoskeletal. Apply and Elastic Bandage. 081-833-0264"],
-  B10DDX = ["Injury","Overuse","Plantar Fasciitis","Tarsal Tunnel Syndrome","Achilles Tendinopathy","Ingrown Toenail","Bunion"], 
+  B10DDX = ["Injury","Overuse","Plantar Fasciitis","Tarsal Tunnel Syndrome","Achilles Tendinopathy","Ingrown Toenail","Bunion"],
 
   B11ACT1 = ["Immobilize the injured extremity.","Start IV for suspected rhabdomyolysis","Crutches for suspected BSI"],
   B11ACT2 = ["Provide crutch if needed"],
@@ -390,7 +390,7 @@ const
   C2MEDCOM = ["Obtain Laboratory Specimens pg. 69-70 (2)(k)"],
   C2STP1 = [ "Subject Area 2: Medical Treatment. Initiate Treatment for a Poisoned Casualty. 081-833-0004", "Subject Area 6: Primary Care. Provide Treatment for Abdominal Disorders. 081-833-0239", "Subject Area 16: CBRN. Provide Treatment for a Radiation Casualty. 081-833-0280"],
   C2DDX = ["Food Intolerance", "Medication", "Infection (Viral/Bacterial)", "Dizziness", "Chest Pain", "Ear Pain", "Heartburn"],
-  
+
 //c3
   C3ACT1 = ["Pregnancy Screen/ Test"],
   C3ACT2 = ["Screen nausea, diarrhea, pelvic pain, constipation, heartburn, urinary Sx, or other symptoms"],
@@ -614,7 +614,7 @@ const
   F3GEN = ["pg. 81-82: ","“Numbness” may be used by the Soldier to describe muscle weakness, malaise, confusion, or abnormal sensation including tingling (a “pins and needles” sensation). Paralysis/weakness is a condition that refers to a loss of muscular strength resulting in difficulty or inability to move a body part. A complete loss of muscular strength is paralysis; a partial loss is weakness."],
   F3MEDCOM = ["Obtain Blood Glucose Levels pg.69(2)(f)"],
   F3STP1 = ["Subject Area 15: Primary Care. Operate a Glucometer 081-833-0257"],
-  
+
   F4ACT1 = ["Glucose < 70 - provide glucose","SpO2 <90 - start oxygen","H/O alcohol - give thiamine","H/O narcotics - give naloxone"],
   F4ACT2 = ["Check rectal temp if heat exposure concern"],
   F4ACT3 = [],
@@ -644,7 +644,7 @@ const
   F5GEN = ["pg. 85-86: ","The terms “depression, nervousness, anxiety, tension” and complaints of “nerves” or “being upset” may all be used by Soldiers to describe problems with mood. Complaints such as these are often due to situational or behavioral health factors, but may also be due to a physical condition. Everyone experiences emotional distress from time to time. However, when symptoms become continuous or interfere with daily functioning, or when suicidal or homicidal thoughts or self-harm are reported, the complaint must be taken seriously and further evaluated."],
   F5MEDCOM = ["N/A"],
   F5STP1 = ["Subject Area 6: Primary Care. Provide Treatment for a Behavioral Emergency 081-833-0246"],
-  
+
   F6ACT1 = [],
   F6ACT2 = [],
   F6ACT3 = [],
@@ -1572,7 +1572,7 @@ M2FLAG = ["N/A"],
 End = [];
 
 //Map the variables to html tags
-const A1decision = {  
+const A1decision = {
   "DACT1" : ["Perform Rapid Strep + Culture Test (barracks, positive close contact, immunosuppressed contact, h/o ARF)"],
   "DACT2" : [],
   "DACT3" : [],
@@ -1592,7 +1592,7 @@ const A1decision = {
   }
 
 
-const A2decision = {  
+const A2decision = {
 "DACT1" : A2ACT1,
 "DACT2" : A2ACT2,
 "DACT3" : A2ACT3,
@@ -1611,7 +1611,7 @@ const A2decision = {
 "DDX" : A2DDX
 }
 
-const A3decision = {  
+const A3decision = {
 "DACT1" : A3ACT1,
 "DACT2" : A3ACT2,
 "DACT3" : A3ACT3,
@@ -1629,7 +1629,7 @@ const A3decision = {
 "RF" : A3FLAG,
 "DDX" : A3DDX
 }
-const A4decision = {  
+const A4decision = {
   "DACT1" : A4ACT1,
   "DACT2" : A4ACT2,
   "DACT3" : A4ACT3,
@@ -1648,7 +1648,7 @@ const A4decision = {
   "DDX" : A4DDX
   }
 
-const A5decision = { 
+const A5decision = {
 "DACT1" : A5ACT1,
 "DACT2" : A5ACT2,
 "DACT3" : A5ACT3,
@@ -1666,7 +1666,7 @@ const A5decision = {
 "RF" : A5FLAG,
 "DDX" : A5DDX
 }
-const B1decision = { 
+const B1decision = {
 "DACT1" : B1ACT1,
 "DACT2" : B1ACT2,
 "DACT3" : B1ACT3,
@@ -2429,7 +2429,7 @@ const F5decision = {
   "RF" : I6FLAG,
   "DDX" : I6DDX
   }
-  
+
   const J1decision ={
     "DACT1" :J1ACT1,
   "DACT2" : J1ACT2,
@@ -3185,7 +3185,7 @@ const F5decision = {
   "STP" : M2STP1,
   "RF" : M2FLAG,
   "DDX" : M2DDX
-  }  
+  }
 
 //map main categories to subcategories in html
 // Optimization: Dynamically resolve DOM elements on click instead of caching all ~150 elements at startup.
@@ -3285,7 +3285,7 @@ const link1 ={
   "L-11" : L11decision,
   "L-12" : L12decision,
   "M-1" : M1decision,
-  "M-2" : M2decision 
+  "M-2" : M2decision
 }
   const sub3 = document.querySelector(".bg4")
   const sheets = document.querySelectorAll(".ADTsheet");
@@ -3315,7 +3315,7 @@ const link1 ={
                 element.style.stroke = 'currentColor';
             }
         }
-  
+
   let currentIconState = "Menu"
   // Function to update menu icon
   function updateMenuIcon() {
@@ -3352,7 +3352,7 @@ const link1 ={
             currentIconState = 'Menu';
             menuIconBox.setAttribute('aria-label', 'Menu');
         }
-        
+
         function showArrow() {
             line1.setAttribute('d', 'M5 12 L19 12'); // Top becomes baseline
             line2.setAttribute('d', 'M5 12 L9 8');   // Middle becomes top arrow
@@ -3363,7 +3363,7 @@ const link1 ={
             currentIconState = 'Back Arrow';
             menuIconBox.setAttribute('aria-label', 'Go Back');
         }
-        
+
         function showClose() {
             if (currentIconState === 'Menu') {
                 // Hamburger to X
@@ -3416,134 +3416,13 @@ function updateInfoContentText() {
         } else {
           infoSubtext.textContent = 'Select a subcategory';
         }
-        
+
     }
 }
 
 
   // Add event listeners to all navigation buttons
-  const subItems = document.querySelectorAll(".catbtn");
-  subItems.forEach(function(btn){
-      btn.addEventListener("click", () => {
-          var btnid = btn.id;
-          var sheet = getSubcatBox(btnid);
-          var Su = document.querySelector(".sub-page")
-          if (btn.closest(".sel-box") === main) {
-              // Moving from main to category view
-              main.classList.add("place-left");
-              main.classList.remove("active");
-              sheet.classList.add("active")
-              var looking = btn.querySelector(".texticon").textContent.trim()
-              var looking2 = btn.querySelector(".btn-text").textContent.trim()
-              var titles = looking +" "+ looking2
-              infoLabel.textContent = titles
-              // Update menu icon
-              updateMenuIcon();
-              updateInfoContentText();
-              
-              // On mobile, switch to CDE panel when clicking subcategory buttons
-          } else{
-              infoContent.classList.add("hidden");
-              var daddy = btn.closest(".sel-box")
-              daddy.classList.remove("selected")
-              daddy.classList.add("place-left")
-              var looking = btn.querySelector(".texticon").innerHTML
-              var looking2 = btn.querySelector(".btn-text").innerHTML
-              var titles = looking +"<br>"+looking2
-              var subtitle = looking + " "+looking2
-              var subtitlebox = document.querySelector(".sub-page-banner")
-              subtitlebox.textContent = subtitle // ⚡ Bolt: Use textContent for better performance
-              infoTitle.innerHTML = titles
-              if (window.innerWidth < 769) {
-                  container.classList.add('active');
-                  var pagetop = document.querySelector(".sub-page-banner-box");
-                  pagetop.classList.add("min")                  
-              } else {
-              info_container.classList.add("active")
-              }
-              Su.classList.add("open")
-              var sheetid = sheet.id
-              sheet.classList.add("selected")
-              const a = link1[sheetid]
-              const JY = [
-                JY1 = a["DACT1"],
-                JY2 = a["DACT2"],
-                JY3 = a["DACT3"],
-                JY4 = a["DPRED"],
-                JY5 = a["DP1"],
-                JY6 = a["DP2"],
-                JY7 = a["DP3"],
-                JY8 = a["DP4"],
-                JY9 = a["DPRE"],
-                JY10 = a["DPRO"],
-                JY11 = a["DLIM"],
-                JY12 = a["GEN"],
-                JY13 = a["MED"],
-                JY14 = a["STP"],
-                JY15 = a["RF"],
-                JY16 = a["DDX"],
-              ]
-              const JERK = [
-                JY1 = sheet.querySelector(".ACT1"),
-                JY2 = sheet.querySelector(".ACT2"),
-                JY3 = sheet.querySelector(".ACT3"),
-                JY4 = sheet.querySelector(".DPRED"),
-                JY5 = sheet.querySelector(".JDP1"),
-                JY6 = sheet.querySelector(".JDP2"),
-                JY7 = sheet.querySelector(".JDP3"),
-                JY8 = sheet.querySelector(".JDP4"),
-                JY9 = sheet.querySelector(".JRETEST"),
-                JY10 = sheet.querySelector(".JDPRO"),
-                JY11 = sheet.querySelector(".LIM"),
-                JY12 = document.querySelector(".GEN"),
-                JY13 = document.querySelector(".MED"),
-                JY14 = document.querySelector(".STP"),
-                JY15 = document.querySelector(".RF"),
-                JY16 = document.querySelector(".DDX")
-              ]
-
-              // Clear global containers (indices 11-15)
-              for (let i = 11; i < 16; i++) {
-                if (JERK[i]) {
-                  const existing = JERK[i].querySelectorAll(".made");
-                  existing.forEach(e => e.remove());
-                }
-              }
-
-              JY.forEach((ele, index) => {
-                if (ele == null) {
-                  null
-                } else {
-                  // For local containers (index < 11), skip if already populated
-                  if (index < 11) {
-                    if (JERK[index] && JERK[index].querySelector(".made")) {
-                      return;
-                    }
-                  }
-
-                  let position = index; // Use index directly
-                  if (JERK[position] == null) {
-                    null
-                  } else {
-                    const container = JERK[position]
-                    var ul = document.createElement("ul");
-                    ul.classList.add("made")
-                    ul.textContent = ""
-                    for (i = 0; i <= ele.length - 1; i++) {
-                      var li = document.createElement('li')
-                      li.textContent = ""
-                      li.textContent = ele[i]
-                      ul.appendChild(li)
-                    }
-                    container.appendChild(ul)
-                  }
-                }
-              });
-          }
-      });
-  });
-
-  const main_menu = document.querySelector(".main_menu")
+  /* Removed catbtn listeners for event delegation */  const main_menu = document.querySelector(".main_menu")
   const med_button = document.querySelector("#section_tag")
 
 // Menu icon click functionality (acts as back button)
@@ -3577,7 +3456,7 @@ menuIconBox.addEventListener('click', function() {
       nonMainElements.push(L);
     }
   });
-  
+
   var sheet = document.querySelectorAll(".ADTsheet.selected");
   const classlist = ["ACT","ACTN","ACTY"];
     if(window.innerWidth < 769) {
@@ -3592,7 +3471,7 @@ menuIconBox.addEventListener('click', function() {
     var daughter = currentel.firstElementChild;
     var sister = daughter.nextElementSibling;
     el.classList.remove("selected");
-    
+
     el.querySelectorAll(".Q").forEach(ele =>{
       ele.classList.remove("open");
       if(ele == el.firstElementChild){
@@ -3602,45 +3481,45 @@ menuIconBox.addEventListener('click', function() {
         sister.classList.add("open");
       }
     });
-    
+
     el.querySelectorAll(".slider").forEach(el1 =>{
       el1.classList.remove('o','yes','no');
     });
-    
+
     el.querySelectorAll(".dispobox.Yikes").forEach(el2 =>{
       el2.classList.remove("open");
     });
-    
+
     el.querySelectorAll(".dispobox.Nah").forEach(el3 =>{
       el3.classList.remove("open");
     });
-    
+
     el.querySelectorAll(".close").forEach(el4 =>{
       var b = el4.closest(".Q");
       var c = b.querySelector(".dispobox.Yikes");
       var d = c.querySelector(".justbox");
-      
+
       if(b.querySelector(".dispobox.Nah") == null){
         // Do nothing
       } else {
         var e = b.querySelector(".dispobox.Nah");
         e.querySelector(".justbox").classList.remove("open");
-      }  
-      
+      }
+
       d.classList.remove("open");
       par = el4.parentElement;
       grandpar = par.parentElement;
-      
+
       if(grandpar.classList.contains("back2")){
         var back = b.querySelector(".back2");
       } else {
         var back = b.querySelector(".back1");
       }
-      
+
       back.classList.remove("opened");
       b.querySelector(".front").classList.remove("closed");
     });
-  });  
+  });
   // Navigation logic based on iteration count
   if(iteration > 0){
     // If there are non-main elements with place-left class
@@ -3651,7 +3530,7 @@ menuIconBox.addEventListener('click', function() {
         ele.classList.remove("place-left");
         ele.classList.remove("active");
       });
-      
+
       // Find which element should be active based on hierarchy
       // This assumes the last element in the array is the deepest in navigation
       const elementToActivate = nonMainElements[nonMainElements.length - 1];
@@ -3663,214 +3542,17 @@ menuIconBox.addEventListener('click', function() {
     sels.forEach(ele => {
       ele.classList.remove("active");
     });
-    
+
     // Reset to main view
     main.classList.remove("place-left");
     main.classList.add("active");
-  }               
+  }
   updateMenuIcon();
   updateInfoContentText();
 });
 
-var justbuttons = document.querySelectorAll(".dispo-icon");
-justbuttons.forEach(function(justbutton) {
-  justbutton.addEventListener("click", () => {
-    var c = justbutton.closest(".dispobox");
-    var back;
-    
-    if (c.classList.contains("Yikes")) {
-      back = justbutton.closest(".Q").querySelector(".back1");
-    } else {
-      back = justbutton.closest(".Q").querySelector(".back2");
-    }
-    
-    var front = justbutton.closest(".Q").querySelector(".front");
-    var justtarget = back.querySelector(".just")
-    var just = back.querySelector(".just ul"); 
-    back.classList.toggle("opened");
-    front.classList.toggle("closed"); 
-    c.querySelector(".justbox").classList.toggle("open");
-    
-    // Toggle aria-expanded
-    var isExpanded = justbutton.getAttribute("aria-expanded") === "true";
-    justbutton.setAttribute("aria-expanded", !isExpanded);
-
-    var border = c.querySelector(".dispobar");
-    const style = getComputedStyle(border);
-    const backgroundcolor = style.backgroundColor;    
-    back.style.backgroundColor = backgroundcolor;
-  });
-});
-
-var closers = document.querySelectorAll(".close")
-closers.forEach(function(currentcloser){
-  currentcloser.addEventListener("click",()=>{
-    var b = currentcloser.closest(".Q");
-    var c = b.querySelector(".dispobox.Yikes");
-    var d = c.querySelector(".justbox")
-    if(b.querySelector(".dispobox.Nah")==null){null}else{
-    var e= b.querySelector(".dispobox.Nah")
-    e.querySelector(".justbox").classList.remove("open")
-    if(e.querySelector(".dispo-icon")) e.querySelector(".dispo-icon").setAttribute("aria-expanded", "false");
-    }
-    d.classList.remove("open")
-    if(c.querySelector(".dispo-icon")) c.querySelector(".dispo-icon").setAttribute("aria-expanded", "false");
-    par = currentcloser.parentElement
-    grandpar = par.parentElement
-    if(grandpar.classList.contains("back2")){
-      var back = b.querySelector(".back2")
-    }else{
-      var back = b.querySelector(".back1")
-    }
-    var style = getComputedStyle(back)
-    var bg = style.backgroundColor
-    back.removeAttribute("style");
-    back.classList.toggle("opened");
-    b.querySelector(".front").classList.toggle("closed");
-    justify()
-  })
-})
-
-//question yes-no slider action + justify() at end
-var btns = document.querySelectorAll(".Aa");
-btns.forEach(function(currentbtn){
-  currentbtn.addEventListener("click",()=>{
-    //name variables based on button
-    var Qs = currentbtn.closest(".Q");
-    var ADT = Qs.closest(".ADTsheet.selected")
-    var frontcard = Qs.querySelector(".dispobar")
-    var slider = Qs.querySelector(".slider");
-    var dispobox = Qs.querySelector(".dispobox.Yikes");
-    var dispo = dispobox.querySelector(".dispo-icon")
-    var box = document.querySelector(".SOAPbox")
-    var note_content = document.querySelector(".item-box")
-    var note_break = document.querySelector(".SOAPbreak")
-    var back1 = Qs.querySelector(".back1")
-    var back2 = Qs.querySelector(".back2")
-    var close = Qs.querySelectorAll(".close i")
-    var close_content = Qs.querySelectorAll(".just li")
-    const at = dispo.attributes
-    //if the slider is not active make it active
-    if(!slider.classList.contains("o")){slider.classList.toggle("o")}
-
-    // Update aria-pressed for accessibility
-    Qs.querySelectorAll(".Aa").forEach(btn => btn.setAttribute('aria-pressed', 'false'));
-    currentbtn.setAttribute('aria-pressed', 'true');
-
-    //if yes - close the no dispobox, open the yes dispobox, and hide the note button
-    if(currentbtn.classList.contains("Y")){
-      if(Qs.querySelector(".dispobox.Nah") == null){null}else{
-        var nah = Qs.querySelector(".dispobox.Nah");
-        nah.classList.remove("open");
-        sub3.classList.remove("keyed");
-        sub3.classList.add("closed")
-      }
-      slider.classList.add("yes")
-      slider.classList.remove("no");
-    //styling
-      var border = Qs.querySelector(".dispobar");
-        dispobox.classList.add("open")
-        const style = getComputedStyle(border);
-        const color = style.backgroundColor
-        const text = style.color
-        slider.style.backgroundColor = color;
-        slider.style.color = text
-        dispo.style.backgroundColor = color;
-        dispo.style.color = text
-        bottombar.style.backgroundColor = color
-        bottombar.style.color = text
-        note_break.style.backgroundColor = text
-        tags.forEach(tag =>{
-          tag.style.accentColor = color
-          tag.style.color = text
-        })
-        close_content.forEach(tag =>{
-          tag.style.color = text
-        })
-        close.forEach(tag =>{
-          tag.style.color = text
-        })        
-        if(back1){
-          back1.style.color = text
-        }
-        if(back2){
-          back2.style.color = text
-        }
-        sub3.style.backgroundColor = color
-        sub3.style.color = text
-        box.style.color = text
-        note_content.style.color = text        
-        sub3.classList.remove("closed")
-        if (Qs.classList.contains("ACTN") || 
-    Qs.classList.contains("ACTY") || 
-    Qs.classList.contains("ACT") || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTY")) || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTN")) || 
-    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACT"))) {sub3.classList.remove("keyed")
-        sub3.classList.add("closed")
-        }else{
-      }
-        justify()
-        CheckTopMarker()
-      }
-    if(currentbtn.classList.contains("N")){
-      slider.classList.add("no")
-      slider.classList.remove("yes");
-      dispobox.classList.remove("open");
-      if(Qs.querySelector(".dispobox.Nah") == null){
-        slider.removeAttribute('style')
-        sub3.classList.remove("keyed");
-        sub3.classList.add("closed")
-      }
-        else{
-          var nah = Qs.querySelector(".dispobox.Nah");
-          var nahbar = nah.querySelector(".dispobar")
-          const style = getComputedStyle(nahbar);
-          const color = style.backgroundColor
-          const text = style.color
-          var d = nah.querySelector(".iconbutton")
-          d.style.backgroundColor = color;
-          sub3.style.backgroundColor = color
-        slider.style.backgroundColor = color
-        slider.style.color = text
-        dispo.style.backgroundColor = color;
-        dispo.setAttribute('fill', text)
-        dispo.style.color = text
-        bottombar.style.backgroundColor = color
-        bottombar.style.color = text
-        note_break.style.backgroundColor = text
-        tags.forEach(tag =>{
-          tag.style.accentColor = color
-          tag.style.color = text
-        })
-        close_content.forEach(tag =>{
-          tag.style.color = text
-        })
-        close.forEach(tag =>{
-          tag.style.color = text
-        })        
-        if(back1){
-          back1.style.color = text
-        }
-        if(back2){
-          back2.style.color = text
-        }
-        sub3.style.backgroundColor = color
-        dispo.setAttribute('fill', text)
-        sub3.style.color = text
-        box.style.color = text
-        note_content.style.color = text      
-          nah.classList.add("open")
-          sub3.classList.remove("closed")
-        }
-        justify()
-        CheckTopMarker()
-    }
-  }) 
-})
-
-
-function justify(){
+/* Removed dispo-icon listeners for event delegation *//* Removed close listeners for event delegation *///question yes-no slider action + justify() at end
+/* Removed Aa listeners for event delegation */function justify(){
   var ADT = document.querySelector(".ADTsheet.selected")
   var bottom = document.querySelector(".bottommarker")
   const bottomboxes = document.querySelector(".info-container")
@@ -3971,7 +3653,7 @@ function justify(){
           Q3.classList.add("open")
         }else{
           if(Q3){Q3.classList.add("open")}
-          
+
         }
       }
     }
@@ -4046,11 +3728,11 @@ function justify(){
       if (window.sectionTwoObserver) {
           window.sectionTwoObserver.disconnect();
       }
-      
+
       const sectionTwoOptions = {
           threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
       };
-      
+
       window.sectionTwoObserver = new IntersectionObserver(function(entries, observer) {
           entries.forEach(entry => {
               if (!entry.isIntersecting) {
@@ -4067,7 +3749,7 @@ function justify(){
       }, sectionTwoOptions);
       window.sectionTwoObserver.observe(sectionTwo);
   }
-  
+
 }
 
 function CheckTopMarker(){
@@ -4080,7 +3762,7 @@ function CheckTopMarker(){
       const TopMarkerOptions = {
           threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
       };
-      
+
       window.TopMarkerObserver = new IntersectionObserver(function(entries, observer) {
           entries.forEach(entry => {
               if (!entry.isIntersecting) {
@@ -4112,8 +3794,8 @@ function checkmedmarker() {
   const medsheet = document.querySelector(".medsheet");
   const menu_banner = document.querySelector(".menu-banner-label");
   const med_banner = document.querySelector(".med_banner");
-  
-  
+
+
   if (!medsheet.classList.contains("open")) {
     // If medsheet is not open, disconnect observer if it exists
     if (MedMarkerObserver) {
@@ -4122,17 +3804,17 @@ function checkmedmarker() {
     }
     return;
   }
-  
+
   // Disconnect any existing observer
   if (MedMarkerObserver) {
     MedMarkerObserver.disconnect();
   }
-  
+
   // Set up the Intersection Observer
   const MedMarkerOptions = {
     threshold: 0.1 // Adjust as needed
   };
-  
+
   MedMarkerObserver = new IntersectionObserver(function(medentries, observer) {
     medentries.forEach(medentry => {
       // Only execute if window width is less than 768px
@@ -4145,7 +3827,7 @@ function checkmedmarker() {
       }
     });
   }, MedMarkerOptions);
-  
+
   MedMarkerObserver.observe(MedMarker);
 }
 
@@ -4155,9 +3837,9 @@ function setupMedsheetObserver() {
   if (!medsheet) {
     return;
   }
-  
+
   const config = { attributes: true, attributeFilter: ['class'] };
-  
+
   const medsheetObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       if (mutation.attributeName === 'class') {
@@ -4172,7 +3854,7 @@ function setupMedsheetObserver() {
       }
     });
   });
-  
+
   medsheetObserver.observe(medsheet, config);
 }
 
@@ -4180,7 +3862,7 @@ function setupMedsheetObserver() {
 document.addEventListener('DOMContentLoaded', function() {
   // Set up the medsheet observer
   setupMedsheetObserver();
-  
+
 });
 
 
@@ -4198,7 +3880,7 @@ function clearboard(){
   CLP.classList.remove("open")
   CLP.querySelector(".slider").classList.remove("o","yes","no")
   if(CLP.querySelector(".dispobox.Yikes") == null){null}else{CLP.querySelector(".dispobox.Yikes").classList.remove("open")}
-  if(CLP.querySelector(".dispobox.Nah") == null){null}else{CLP.querySelector(".dispobox.Nah").classList.remove("open")}  
+  if(CLP.querySelector(".dispobox.Nah") == null){null}else{CLP.querySelector(".dispobox.Nah").classList.remove("open")}
   CLP = CLP.nextElementSibling
   }
   if(classnames.some(classnames => first.classList.contains(classnames))){
@@ -4207,27 +3889,7 @@ function clearboard(){
   }
 }
 
-var contentClosing = document.querySelectorAll(".contbox-top")
-contentClosing.forEach(function(el){
-        el.addEventListener("click",() =>{
-                var son = el.querySelector(".contbox-close")
-                var dad = el.closest(".sub-page-pre");
-                var box = dad.querySelector(".contbox-content");
-                if(box.classList.contains("closed")){
-                        box.classList.remove("closed")
-                        son.classList.remove("closed")
-                        el.setAttribute("aria-expanded", "true")
-                }else{
-                        box.classList.add("closed")
-                        son.classList.add("closed")
-                        el.setAttribute("aria-expanded", "false")
-                }
-        
-        })
-})
-
-
-// submitlabel to copy the note shows up with all the checkmarks. 
+/* Removed contbox-top listeners for event delegation */// submitlabel to copy the note shows up with all the checkmarks.
 const panel = document.querySelector(".bg4");
 const copyButton = document.querySelector(".copy-button");
 const checkbox1 = document.getElementById("checkbox1");
@@ -4258,7 +3920,7 @@ copyButton.addEventListener('click', () => {
       panel.classList.add("copied");
       panel.classList.remove("keyed");
       writenote()
-    } 
+    }
 });
 // Close panel when clicking outside
 document.addEventListener('click', (e) => {
@@ -4286,7 +3948,7 @@ finalbutton.addEventListener("click", ()=>{
   panel.classList.remove("copied")
   helper.classList.remove("faded")
 }, 2000);
-  
+
 })
 
 
@@ -4327,7 +3989,7 @@ window.addEventListener('resize', function() {
                 if(!pagetop.classList.contains("min")){
                 pagetop.classList.add("min")
                 }
-            }else 
+            }else
               if(app_state === "subcategory" || app_state === "main"){
               container.classList.remove("active")
             }
@@ -4415,7 +4077,7 @@ if(document.querySelector("#checkbox1").checked === true){
       "Q3" : ["3."],
       "Q4" : ["4."],
       "Q5" : ["5."],
-      "Q6" : ["6."]     
+      "Q6" : ["6."]
     }
     var slider = current.querySelector(".slider")
     var Ay = current.querySelector(".Aa.Y")
@@ -4502,7 +4164,7 @@ if(document.querySelector("#checkbox1").checked === true){
   ref_container.append(ref_title)
   Geeks.push("","",lastopen_div_text)
   }
-  }  
+  }
 
   const Geekssep = Geeks.join("\n")
   navigator.clipboard.writeText(Geekssep)
@@ -5059,31 +4721,13 @@ med44 : [
 
 //medbtn listener for all medications to open their respective sheet and populate the information.
 
-med_btns.forEach(function(med_btn){
-      med_btn.addEventListener("click", () => {
-        const med_id = med_btn.id
-        const medicationData = medboxes[med_id];
-        const med_title = med_btn.textContent
-        const banner = document.querySelector(".med_banner")
-        banner.textContent = med_title
-        container.classList.add('active');
-        if(banner.classList.contains("open")){null}else{medsheet.classList.add("open")}
-        // Iterate through each category item
-        medicationData.forEach((item, index) => {
-            // Get the content for this category
-            const content = item.Content;
-            updateCategoryContent(index, content)
-        })
-      })
-})
-
-function updateCategoryContent(categoryIndex, contentArray) {
+/* Removed medbtn listeners for event delegation */function updateCategoryContent(categoryIndex, contentArray) {
     const contentContainers = document.querySelectorAll('.med_content_content');
-    
+
     if (contentContainers[categoryIndex]) {
         // Clear previous content
         contentContainers[categoryIndex].innerHTML = '';
-        
+
         // Add new content
         // Optimization: Use DocumentFragment to batch DOM insertions
         const fragment = document.createDocumentFragment();
@@ -5391,6 +5035,380 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     }
+
+
+    // Delegated click listener for performance optimization
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+
+        const catbtn = target.closest('.catbtn');
+        if (catbtn) {
+            const btn = catbtn;
+
+          var btnid = btn.id;
+          var sheet = getSubcatBox(btnid);
+          var Su = document.querySelector(".sub-page")
+          if (btn.closest(".sel-box") === main) {
+              // Moving from main to category view
+              main.classList.add("place-left");
+              main.classList.remove("active");
+              sheet.classList.add("active")
+              var looking = btn.querySelector(".texticon").textContent.trim()
+              var looking2 = btn.querySelector(".btn-text").textContent.trim()
+              var titles = looking +" "+ looking2
+              infoLabel.textContent = titles
+              // Update menu icon
+              updateMenuIcon();
+              updateInfoContentText();
+
+              // On mobile, switch to CDE panel when clicking subcategory buttons
+          } else{
+              infoContent.classList.add("hidden");
+              var daddy = btn.closest(".sel-box")
+              daddy.classList.remove("selected")
+              daddy.classList.add("place-left")
+              var looking = btn.querySelector(".texticon").innerHTML
+              var looking2 = btn.querySelector(".btn-text").innerHTML
+              var titles = looking +"<br>"+looking2
+              var subtitle = looking + " "+looking2
+              var subtitlebox = document.querySelector(".sub-page-banner")
+              subtitlebox.textContent = subtitle // ⚡ Bolt: Use textContent for better performance
+              infoTitle.innerHTML = titles
+              if (window.innerWidth < 769) {
+                  container.classList.add('active');
+                  var pagetop = document.querySelector(".sub-page-banner-box");
+                  pagetop.classList.add("min")
+              } else {
+              info_container.classList.add("active")
+              }
+              Su.classList.add("open")
+              var sheetid = sheet.id
+              sheet.classList.add("selected")
+              const a = link1[sheetid]
+              const JY = [
+                JY1 = a["DACT1"],
+                JY2 = a["DACT2"],
+                JY3 = a["DACT3"],
+                JY4 = a["DPRED"],
+                JY5 = a["DP1"],
+                JY6 = a["DP2"],
+                JY7 = a["DP3"],
+                JY8 = a["DP4"],
+                JY9 = a["DPRE"],
+                JY10 = a["DPRO"],
+                JY11 = a["DLIM"],
+                JY12 = a["GEN"],
+                JY13 = a["MED"],
+                JY14 = a["STP"],
+                JY15 = a["RF"],
+                JY16 = a["DDX"],
+              ]
+              const JERK = [
+                JY1 = sheet.querySelector(".ACT1"),
+                JY2 = sheet.querySelector(".ACT2"),
+                JY3 = sheet.querySelector(".ACT3"),
+                JY4 = sheet.querySelector(".DPRED"),
+                JY5 = sheet.querySelector(".JDP1"),
+                JY6 = sheet.querySelector(".JDP2"),
+                JY7 = sheet.querySelector(".JDP3"),
+                JY8 = sheet.querySelector(".JDP4"),
+                JY9 = sheet.querySelector(".JRETEST"),
+                JY10 = sheet.querySelector(".JDPRO"),
+                JY11 = sheet.querySelector(".LIM"),
+                JY12 = document.querySelector(".GEN"),
+                JY13 = document.querySelector(".MED"),
+                JY14 = document.querySelector(".STP"),
+                JY15 = document.querySelector(".RF"),
+                JY16 = document.querySelector(".DDX")
+              ]
+
+              // Clear global containers (indices 11-15)
+              for (let i = 11; i < 16; i++) {
+                if (JERK[i]) {
+                  const existing = JERK[i].querySelectorAll(".made");
+                  existing.forEach(e => e.remove());
+                }
+              }
+
+              JY.forEach((ele, index) => {
+                if (ele == null) {
+                  null
+                } else {
+                  // For local containers (index < 11), skip if already populated
+                  if (index < 11) {
+                    if (JERK[index] && JERK[index].querySelector(".made")) {
+                      return;
+                    }
+                  }
+
+                  let position = index; // Use index directly
+                  if (JERK[position] == null) {
+                    null
+                  } else {
+                    const container = JERK[position]
+                    var ul = document.createElement("ul");
+                    ul.classList.add("made")
+                    ul.textContent = ""
+                    for (i = 0; i <= ele.length - 1; i++) {
+                      var li = document.createElement('li')
+                      li.textContent = ""
+                      li.textContent = ele[i]
+                      ul.appendChild(li)
+                    }
+                    container.appendChild(ul)
+                  }
+                }
+              });
+          }
+
+            return;
+        }
+
+        const dispoIcon = target.closest('.dispo-icon');
+        if (dispoIcon) {
+            const justbutton = dispoIcon;
+
+    var c = justbutton.closest(".dispobox");
+    var back;
+
+    if (c.classList.contains("Yikes")) {
+      back = justbutton.closest(".Q").querySelector(".back1");
+    } else {
+      back = justbutton.closest(".Q").querySelector(".back2");
+    }
+
+    var front = justbutton.closest(".Q").querySelector(".front");
+    var justtarget = back.querySelector(".just")
+    var just = back.querySelector(".just ul");
+    back.classList.toggle("opened");
+    front.classList.toggle("closed");
+    c.querySelector(".justbox").classList.toggle("open");
+
+    // Toggle aria-expanded
+    var isExpanded = justbutton.getAttribute("aria-expanded") === "true";
+    justbutton.setAttribute("aria-expanded", !isExpanded);
+
+    var border = c.querySelector(".dispobar");
+    const style = getComputedStyle(border);
+    const backgroundcolor = style.backgroundColor;
+    back.style.backgroundColor = backgroundcolor;
+
+            return;
+        }
+
+        const closeBtn = target.closest('.close');
+        if (closeBtn) {
+            const currentcloser = closeBtn;
+
+    var b = currentcloser.closest(".Q");
+    var c = b.querySelector(".dispobox.Yikes");
+    var d = c.querySelector(".justbox")
+    if(b.querySelector(".dispobox.Nah")==null){null}else{
+    var e= b.querySelector(".dispobox.Nah")
+    e.querySelector(".justbox").classList.remove("open")
+    if(e.querySelector(".dispo-icon")) e.querySelector(".dispo-icon").setAttribute("aria-expanded", "false");
+    }
+    d.classList.remove("open")
+    if(c.querySelector(".dispo-icon")) c.querySelector(".dispo-icon").setAttribute("aria-expanded", "false");
+    par = currentcloser.parentElement
+    grandpar = par.parentElement
+    if(grandpar.classList.contains("back2")){
+      var back = b.querySelector(".back2")
+    }else{
+      var back = b.querySelector(".back1")
+    }
+    var style = getComputedStyle(back)
+    var bg = style.backgroundColor
+    back.removeAttribute("style");
+    back.classList.toggle("opened");
+    b.querySelector(".front").classList.toggle("closed");
+    justify()
+
+            return;
+        }
+
+        const aaBtn = target.closest('.Aa');
+        if (aaBtn) {
+            const currentbtn = aaBtn;
+
+    //name variables based on button
+    var Qs = currentbtn.closest(".Q");
+    var ADT = Qs.closest(".ADTsheet.selected")
+    var frontcard = Qs.querySelector(".dispobar")
+    var slider = Qs.querySelector(".slider");
+    var dispobox = Qs.querySelector(".dispobox.Yikes");
+    var dispo = dispobox.querySelector(".dispo-icon")
+    var box = document.querySelector(".SOAPbox")
+    var note_content = document.querySelector(".item-box")
+    var note_break = document.querySelector(".SOAPbreak")
+    var back1 = Qs.querySelector(".back1")
+    var back2 = Qs.querySelector(".back2")
+    var close = Qs.querySelectorAll(".close i")
+    var close_content = Qs.querySelectorAll(".just li")
+    const at = dispo.attributes
+    //if the slider is not active make it active
+    if(!slider.classList.contains("o")){slider.classList.toggle("o")}
+
+    // Update aria-pressed for accessibility
+    Qs.querySelectorAll(".Aa").forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+    currentbtn.setAttribute('aria-pressed', 'true');
+
+    //if yes - close the no dispobox, open the yes dispobox, and hide the note button
+    if(currentbtn.classList.contains("Y")){
+      if(Qs.querySelector(".dispobox.Nah") == null){null}else{
+        var nah = Qs.querySelector(".dispobox.Nah");
+        nah.classList.remove("open");
+        sub3.classList.remove("keyed");
+        sub3.classList.add("closed")
+      }
+      slider.classList.add("yes")
+      slider.classList.remove("no");
+    //styling
+      var border = Qs.querySelector(".dispobar");
+        dispobox.classList.add("open")
+        const style = getComputedStyle(border);
+        const color = style.backgroundColor
+        const text = style.color
+        slider.style.backgroundColor = color;
+        slider.style.color = text
+        dispo.style.backgroundColor = color;
+        dispo.style.color = text
+        bottombar.style.backgroundColor = color
+        bottombar.style.color = text
+        note_break.style.backgroundColor = text
+        tags.forEach(tag =>{
+          tag.style.accentColor = color
+          tag.style.color = text
+        })
+        close_content.forEach(tag =>{
+          tag.style.color = text
+        })
+        close.forEach(tag =>{
+          tag.style.color = text
+        })
+        if(back1){
+          back1.style.color = text
+        }
+        if(back2){
+          back2.style.color = text
+        }
+        sub3.style.backgroundColor = color
+        sub3.style.color = text
+        box.style.color = text
+        note_content.style.color = text
+        sub3.classList.remove("closed")
+        if (Qs.classList.contains("ACTN") ||
+    Qs.classList.contains("ACTY") ||
+    Qs.classList.contains("ACT") ||
+    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTY")) ||
+    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACTN")) ||
+    (Qs.nextElementSibling && Qs.nextElementSibling.classList.contains("ACT"))) {sub3.classList.remove("keyed")
+        sub3.classList.add("closed")
+        }else{
+      }
+        justify()
+        CheckTopMarker()
+      }
+    if(currentbtn.classList.contains("N")){
+      slider.classList.add("no")
+      slider.classList.remove("yes");
+      dispobox.classList.remove("open");
+      if(Qs.querySelector(".dispobox.Nah") == null){
+        slider.removeAttribute('style')
+        sub3.classList.remove("keyed");
+        sub3.classList.add("closed")
+      }
+        else{
+          var nah = Qs.querySelector(".dispobox.Nah");
+          var nahbar = nah.querySelector(".dispobar")
+          const style = getComputedStyle(nahbar);
+          const color = style.backgroundColor
+          const text = style.color
+          var d = nah.querySelector(".iconbutton")
+          d.style.backgroundColor = color;
+          sub3.style.backgroundColor = color
+        slider.style.backgroundColor = color
+        slider.style.color = text
+        dispo.style.backgroundColor = color;
+        dispo.setAttribute('fill', text)
+        dispo.style.color = text
+        bottombar.style.backgroundColor = color
+        bottombar.style.color = text
+        note_break.style.backgroundColor = text
+        tags.forEach(tag =>{
+          tag.style.accentColor = color
+          tag.style.color = text
+        })
+        close_content.forEach(tag =>{
+          tag.style.color = text
+        })
+        close.forEach(tag =>{
+          tag.style.color = text
+        })
+        if(back1){
+          back1.style.color = text
+        }
+        if(back2){
+          back2.style.color = text
+        }
+        sub3.style.backgroundColor = color
+        dispo.setAttribute('fill', text)
+        sub3.style.color = text
+        box.style.color = text
+        note_content.style.color = text
+          nah.classList.add("open")
+          sub3.classList.remove("closed")
+        }
+        justify()
+        CheckTopMarker()
+    }
+
+            return;
+        }
+
+        const contboxTop = target.closest('.contbox-top');
+        if (contboxTop) {
+            const el = contboxTop;
+
+                var son = el.querySelector(".contbox-close")
+                var dad = el.closest(".sub-page-pre");
+                var box = dad.querySelector(".contbox-content");
+                if(box.classList.contains("closed")){
+                        box.classList.remove("closed")
+                        son.classList.remove("closed")
+                        el.setAttribute("aria-expanded", "true")
+                }else{
+                        box.classList.add("closed")
+                        son.classList.add("closed")
+                        el.setAttribute("aria-expanded", "false")
+                }
+
+
+            return;
+        }
+
+        const medBtn = target.closest('.medbtn');
+        if (medBtn) {
+            const med_btn = medBtn;
+
+        const med_id = med_btn.id
+        const medicationData = medboxes[med_id];
+        const med_title = med_btn.textContent
+        const banner = document.querySelector(".med_banner")
+        banner.textContent = med_title
+        container.classList.add('active');
+        if(banner.classList.contains("open")){null}else{medsheet.classList.add("open")}
+        // Iterate through each category item
+        medicationData.forEach((item, index) => {
+            // Get the content for this category
+            const content = item.Content;
+            updateCategoryContent(index, content)
+        })
+
+            return;
+        }
+    });
+
 
     // Delegated event listener for keyboard navigation (Enter/Space)
     // Optimization: Use event delegation instead of attaching 1200+ listeners
