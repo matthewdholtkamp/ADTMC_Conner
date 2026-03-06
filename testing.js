@@ -3910,7 +3910,10 @@ function quick(){
 panel.addEventListener('click', () => {
     if (!panel.classList.contains("keyed") && !panel.classList.contains("copied")) {
         panel.classList.add("keyed");
-        helper.classList.add("faded")
+        helper.classList.add("faded");
+        setTimeout(() => {
+            if (checkbox1) checkbox1.focus();
+        }, 100);
     }
 });
 
@@ -3919,7 +3922,10 @@ copyButton.addEventListener('click', () => {
       bottombar.classList.add("open")
       panel.classList.add("copied");
       panel.classList.remove("keyed");
-      writenote()
+      writenote();
+      setTimeout(() => {
+          if (finalbutton) finalbutton.focus();
+      }, 100);
     }
 });
 // Close panel when clicking outside
@@ -3947,6 +3953,7 @@ finalbutton.addEventListener("click", ()=>{
   panel.classList.remove("keyed")
   panel.classList.remove("copied")
   helper.classList.remove("faded")
+  if (panel) panel.focus();
 }, 2000);
 
 })

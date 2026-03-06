@@ -25,3 +25,6 @@
 ## 2026-03-03 - Accessible State for Custom Toggle Buttons
 **Learning:** When using custom `div` elements to create toggle groups (like Yes/No sliders) that rely on visual cues (e.g., a background slider) for their state, this state is completely invisible to screen readers. To make these accessible, the `aria-pressed` attribute must be used.
 **Action:** When creating or modifying custom toggle buttons, ensure `aria-pressed` is initialized to `false` and dynamically toggled to `true` on the selected element (and `false` on siblings) within the click event handler.
+## YYYY-MM-DD - Playwright Tests for Bottom Panel
+**Learning:** In automated Playwright tests, interacting with elements inside the bottom panel (like `.copy-button`) requires JavaScript evaluation (e.g., `page.evaluate()`) or forced clicks, as they are intentionally placed behind a helper overlay that absorbs standard clicks.
+**Action:** Use `page.evaluate()` or `force=True` when simulating clicks on these specific overlay-obstructed buttons in future verification scripts.
