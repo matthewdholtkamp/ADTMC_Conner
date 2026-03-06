@@ -4042,9 +4042,9 @@ subtitle.textContent = title_text
 const Geeks = []
 Geeks.push("SCREENED IAW ADTMC MEDCOM PAM 40-7-21",date_for_text,"",title_text)
 
-const existing = document.getElementsByClassName("submitmade")
-  while(existing.length > 0)
-  existing[0].parentNode.removeChild(existing[0])
+// Optimization: Using querySelectorAll (static NodeList) instead of getElementsByClassName (live HTMLCollection)
+// prevents layout thrashing and O(n^2) performance degradation when removing multiple elements
+document.querySelectorAll(".submitmade").forEach(el => el.remove());
 if(document.querySelector("#checkbox2").checked === true){
     Geeks.push("RED FLAGS:")
     rf_list.classList.remove("no")
