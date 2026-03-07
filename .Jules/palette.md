@@ -25,3 +25,7 @@
 ## 2026-03-03 - Accessible State for Custom Toggle Buttons
 **Learning:** When using custom `div` elements to create toggle groups (like Yes/No sliders) that rely on visual cues (e.g., a background slider) for their state, this state is completely invisible to screen readers. To make these accessible, the `aria-pressed` attribute must be used.
 **Action:** When creating or modifying custom toggle buttons, ensure `aria-pressed` is initialized to `false` and dynamically toggled to `true` on the selected element (and `false` on siblings) within the click event handler.
+
+## 2026-03-04 - Toast Notifications Accessibility
+**Learning:** CSS-toggled toast notifications that appear without a page reload (e.g., "Selection Copied to Clipboard") are completely invisible to screen readers unless specifically marked.
+**Action:** Always add `role="status"` and `aria-live="polite"` to the container of dynamically displayed toast notifications to ensure they are announced upon appearance without interrupting the user.
