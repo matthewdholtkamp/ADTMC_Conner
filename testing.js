@@ -3724,29 +3724,29 @@ menuIconBox.addEventListener('click', function() {
   }
   const sectionTwo = document.querySelector(".bottommarker");
   if (sectionTwo) {
-      // First, disconnect any existing observer to prevent multiple observers
-      if (window.sectionTwoObserver) {
-          window.sectionTwoObserver.disconnect();
+      // ⚡ Bolt: Use Singleton IntersectionObserver to reduce GC thrashing
+      if (!window.sectionTwoObserver) {
+          const sectionTwoOptions = {
+              threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
+          };
+
+          window.sectionTwoObserver = new IntersectionObserver(function(entries, observer) {
+              entries.forEach(entry => {
+                  if (!entry.isIntersecting) {
+                      if (document.querySelector(".sub-page.open")) {
+                          entry.target.scrollIntoView({
+                              behavior: 'smooth'
+                          });
+                          // Stop observing after handling this event
+                          observer.unobserve(entry.target);
+                      }
+                  }
+              });
+          }, sectionTwoOptions);
+      } else {
+          window.sectionTwoObserver.unobserve(sectionTwo);
       }
 
-      const sectionTwoOptions = {
-          threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
-      };
-
-      window.sectionTwoObserver = new IntersectionObserver(function(entries, observer) {
-          entries.forEach(entry => {
-              if (!entry.isIntersecting) {
-                  if (document.querySelector(".sub-page.open")) {
-                      sectionTwo.scrollIntoView({
-                          behavior: 'smooth'
-                      });
-                      // Stop observing after handling this event
-                      observer.disconnect();
-                      window.sectionTwoObserver = null;
-                  }
-              }
-          });
-      }, sectionTwoOptions);
       window.sectionTwoObserver.observe(sectionTwo);
   }
 
@@ -3755,31 +3755,32 @@ menuIconBox.addEventListener('click', function() {
 function CheckTopMarker(){
   const TopMarker = document.querySelector(".sub_page_marker");
   if (TopMarker) {
-      // First, disconnect any existing observer to prevent multiple observers
-      if (window.TopMarkerObserver) {
-          window.TopMarkerObserver.disconnect();
-      }
-      const TopMarkerOptions = {
-          threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
-      };
+      // ⚡ Bolt: Use Singleton IntersectionObserver to reduce GC thrashing
+      if (!window.TopMarkerObserver) {
+          const TopMarkerOptions = {
+              threshold: 0.1 // Adjust as needed - triggers when 10% of element is out of view
+          };
 
-      window.TopMarkerObserver = new IntersectionObserver(function(entries, observer) {
-          entries.forEach(entry => {
-              if (!entry.isIntersecting) {
-                  if(window.innerWidth<768){
-                  if (document.querySelector(".sub-page.open")) {
-                    var sub_page_banner = document.querySelector(".sub-page-banner").textContent
-                    menu_banner.textContent = sub_page_banner
-                    console.log("this works")
-                      // Stop observing after handling this event
-                      observer.disconnect();
-                      window.TopMarkerObserver = null;
-                  }}
-              } else if(entry.isIntersecting){
-                menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Avoid HTML parser overhead
-              }
-          });
-      }, TopMarkerOptions);
+          window.TopMarkerObserver = new IntersectionObserver(function(entries, observer) {
+              entries.forEach(entry => {
+                  if (!entry.isIntersecting) {
+                      if(window.innerWidth<768){
+                      if (document.querySelector(".sub-page.open")) {
+                        var sub_page_banner = document.querySelector(".sub-page-banner").textContent
+                        menu_banner.textContent = sub_page_banner
+                        console.log("this works")
+                          // Stop observing after handling this event
+                          observer.unobserve(entry.target);
+                      }}
+                  } else if(entry.isIntersecting){
+                    menu_banner.textContent = "ADTMC 2.5" // ⚡ Bolt: Avoid HTML parser overhead
+                  }
+              });
+          }, TopMarkerOptions);
+      } else {
+          window.TopMarkerObserver.unobserve(TopMarker);
+      }
+
       window.TopMarkerObserver.observe(TopMarker);
   }
 }
@@ -3797,36 +3798,34 @@ function checkmedmarker() {
 
 
   if (!medsheet.classList.contains("open")) {
-    // If medsheet is not open, disconnect observer if it exists
-    if (MedMarkerObserver) {
-      MedMarkerObserver.disconnect();
-      MedMarkerObserver = null;
+    // If medsheet is not open, unobserve if observer exists
+    if (MedMarkerObserver && MedMarker) {
+      MedMarkerObserver.unobserve(MedMarker);
     }
     return;
   }
 
-  // Disconnect any existing observer
-  if (MedMarkerObserver) {
-    MedMarkerObserver.disconnect();
+  // ⚡ Bolt: Use Singleton IntersectionObserver to reduce GC thrashing
+  if (!MedMarkerObserver) {
+      const MedMarkerOptions = {
+        threshold: 0.1 // Adjust as needed
+      };
+
+      MedMarkerObserver = new IntersectionObserver(function(medentries, observer) {
+        medentries.forEach(medentry => {
+          // Only execute if window width is less than 768px
+          if (window.innerWidth < 768) {
+            if (!medentry.isIntersecting) {
+              menu_banner.textContent = med_banner.textContent
+            } else {
+              menu_banner.textContent = "ADTMC Medications List" // ⚡ Bolt: Avoid HTML parser overhead;
+            }
+          }
+        });
+      }, MedMarkerOptions);
+  } else {
+      MedMarkerObserver.unobserve(MedMarker);
   }
-
-  // Set up the Intersection Observer
-  const MedMarkerOptions = {
-    threshold: 0.1 // Adjust as needed
-  };
-
-  MedMarkerObserver = new IntersectionObserver(function(medentries, observer) {
-    medentries.forEach(medentry => {
-      // Only execute if window width is less than 768px
-      if (window.innerWidth < 768) {
-        if (!medentry.isIntersecting) {
-          menu_banner.textContent = med_banner.textContent
-        } else {
-          menu_banner.textContent = "ADTMC Medications List" // ⚡ Bolt: Avoid HTML parser overhead;
-        }
-      }
-    });
-  }, MedMarkerOptions);
 
   MedMarkerObserver.observe(MedMarker);
 }
