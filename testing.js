@@ -3878,8 +3878,14 @@ function clearboard(){
   while(CLP){
   CLP.classList.remove("open")
   CLP.querySelector(".slider").classList.remove("o","yes","no")
-  if(CLP.querySelector(".dispobox.Yikes") == null){null}else{CLP.querySelector(".dispobox.Yikes").classList.remove("open")}
-  if(CLP.querySelector(".dispobox.Nah") == null){null}else{CLP.querySelector(".dispobox.Nah").classList.remove("open")}
+
+  // ⚡ Bolt: Cache DOM queries to prevent redundant lookups and layout thrashing inside while loops
+  const yikes = CLP.querySelector(".dispobox.Yikes");
+  if(yikes !== null){yikes.classList.remove("open")}
+
+  const nah = CLP.querySelector(".dispobox.Nah");
+  if(nah !== null){nah.classList.remove("open")}
+
   CLP = CLP.nextElementSibling
   }
   if(classnames.some(classnames => first.classList.contains(classnames))){
