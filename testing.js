@@ -3866,6 +3866,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// ⚡ Bolt: Helper to resolve dispobar colors from classnames instead of getComputedStyle to prevent layout thrashing
+function getDispobarColors(element) {
+  if (element.classList.contains("DR") || element.classList.contains("DI")) {
+      return { bg: "var(--BannerRed)", text: "var(--TextColor2)" };
+  }
+  if (element.classList.contains("DII") || element.classList.contains("DRETEST")) {
+      return { bg: "var(--BG2)", text: "var(--TextColor1)" };
+  }
+  if (element.classList.contains("DIV") || element.classList.contains("DRTD")) {
+      return { bg: "var(--Backgroundbluelight)", text: "var(--TextColor2)" };
+  }
+  if (element.classList.contains("DACT")) {
+      return { bg: "var(--Backgroundlightgray)", text: "var(--TextColor1)" };
+  }
+  return { bg: "", text: "" };
+}
+
 // clears the board if something turns yes
 // + add clear submitbar and resubmit if applicable
 function clearboard(){
@@ -5194,9 +5211,9 @@ document.addEventListener('DOMContentLoaded', () => {
     justbutton.setAttribute("aria-expanded", !isExpanded);
 
     var border = c.querySelector(".dispobar");
-    const style = getComputedStyle(border);
-    const backgroundcolor = style.backgroundColor;
-    back.style.backgroundColor = backgroundcolor;
+    // ⚡ Bolt: Get colors without forcing a synchronous layout recalculation
+    const colors = getDispobarColors(border);
+    back.style.backgroundColor = colors.bg;
 
             return;
         }
@@ -5222,8 +5239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }else{
       var back = b.querySelector(".back1")
     }
-    var style = getComputedStyle(back)
-    var bg = style.backgroundColor
+    // ⚡ Bolt: Removed unused getComputedStyle to prevent layout thrashing
     back.removeAttribute("style");
     back.classList.toggle("opened");
     b.querySelector(".front").classList.toggle("closed");
@@ -5271,9 +5287,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //styling
       var border = Qs.querySelector(".dispobar");
         dispobox.classList.add("open")
-        const style = getComputedStyle(border);
-        const color = style.backgroundColor
-        const text = style.color
+        // ⚡ Bolt: Get colors without forcing a synchronous layout recalculation
+        const colors = getDispobarColors(border);
+        const color = colors.bg;
+        const text = colors.text;
         slider.style.backgroundColor = color;
         slider.style.color = text
         dispo.style.backgroundColor = color;
@@ -5326,9 +5343,10 @@ document.addEventListener('DOMContentLoaded', () => {
         else{
           var nah = Qs.querySelector(".dispobox.Nah");
           var nahbar = nah.querySelector(".dispobar")
-          const style = getComputedStyle(nahbar);
-          const color = style.backgroundColor
-          const text = style.color
+          // ⚡ Bolt: Get colors without forcing a synchronous layout recalculation
+          const colors = getDispobarColors(nahbar);
+          const color = colors.bg;
+          const text = colors.text;
           var d = nah.querySelector(".iconbutton")
           d.style.backgroundColor = color;
           sub3.style.backgroundColor = color
