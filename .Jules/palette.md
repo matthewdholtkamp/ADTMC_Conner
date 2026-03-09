@@ -29,3 +29,7 @@
 ## 2026-03-04 - Toast Notifications Accessibility
 **Learning:** CSS-toggled toast notifications that appear without a page reload (e.g., "Selection Copied to Clipboard") are completely invisible to screen readers unless specifically marked.
 **Action:** Always add `role="status"` and `aria-live="polite"` to the container of dynamically displayed toast notifications to ensure they are announced upon appearance without interrupting the user.
+
+## 2026-03-09 - Binding Expandable Content to Controls
+**Learning:** Adding `aria-expanded` to toggle buttons isn't enough; screen readers also need to know *what* the button controls. For dynamically populated or numerous identical components (like accordions or dispo-icons), generating unique IDs for the content containers and linking them with `aria-controls` during initialization ensures the screen reader provides full context.
+**Action:** Whenever `aria-expanded` is used on a control that toggles visibility of another element, make sure to set the `aria-controls` attribute linking the two, dynamically generating unique IDs if necessary.

@@ -5007,6 +5007,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const elements = document.querySelectorAll(accessibleSelectors.join(', '));
 
+        let contboxCounter = 0;
+        let dispoCounter = 0;
+
         elements.forEach(el => {
             if (!el.hasAttribute('role')) {
                 el.setAttribute('role', 'button');
@@ -5024,6 +5027,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (el.classList.contains('dispo-icon')) {
                 el.setAttribute('aria-expanded', 'false');
+
+                var dispobox = el.closest(".dispobox");
+                var back = null;
+                if (dispobox) {
+                    var qContainer = dispobox.closest(".Q");
+                    if (qContainer) {
+                        if (dispobox.classList.contains("Yikes")) {
+                            back = qContainer.querySelector(".back1");
+                        } else {
+                            back = qContainer.querySelector(".back2");
+                        }
+                    }
+                }
+                if (back) {
+                    if (!back.id) {
+                        dispoCounter++;
+                        back.id = 'dispo-content-' + dispoCounter;
+                    }
+                    el.setAttribute('aria-controls', back.id);
+                }
             }
             if (el.classList.contains('contbox-top')) {
                 var dad = el.closest(".sub-page-pre");
@@ -5031,6 +5054,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     var box = dad.querySelector(".contbox-content");
                     if (box) {
                         el.setAttribute('aria-expanded', box.classList.contains("closed") ? 'false' : 'true');
+                        if (!box.id) {
+                            contboxCounter++;
+                            box.id = 'contbox-content-' + contboxCounter;
+                        }
+                        el.setAttribute('aria-controls', box.id);
                     }
                 }
             }
