@@ -5,3 +5,7 @@
 ## 2026-03-07 - Recreating API Objects causes GC thrashing
 **Learning:** Initializing browser API objects (like `IntersectionObserver`) inside high-frequency UI events (like `justify()`, which executes repeatedly on UI interactions) causes excessive Garbage Collection (GC) thrashing and spikes CPU overhead.
 **Action:** Use a lazy-initialized singleton pattern. Instantiate the observer once, and use `.unobserve()` and `.observe()` to manage targets instead of disconnecting and recreating the object.
+
+## 2026-03-08 - Synchronous Layout Thrashing via `getComputedStyle`
+**Learning:** Using `getComputedStyle` within frequent UI click handlers forces the browser to flush the layout queue and recalculate styles synchronously, causing noticeable lag on lower-end devices.
+**Action:** Avoid querying computed styles dynamically if the CSS variables can be statically mapped. I added a helper function to derive colors directly from static class names instead of forcing a layout calculation.
