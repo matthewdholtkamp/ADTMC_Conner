@@ -79,6 +79,11 @@
             margin-left: 8px;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .menu-item-box:hover {
+            background-color: var(--Backgroundlightgray);
         }
 
         .menu-item-box:focus-visible {
@@ -739,6 +744,12 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   margin-right: 10px;
   border-radius: 50%;
   background-color: red;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.dispo-icon:hover {
+  transform: scale(1.05);
 }
 
 .dispo-label{
@@ -781,6 +792,12 @@ margin-right: 10px;
   color: var(--TextColor1);
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contbox:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
 .contbox-close{
   display: flex;
@@ -1206,7 +1223,12 @@ margin-right: 10px;
   align-items: center;
   visibility: visible;
   opacity: 1;
+  cursor: pointer;
   transition: all 0.1s ease;
+}
+
+.close:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .close i{
   position: relative;
@@ -1304,6 +1326,12 @@ color: var(--TextColor1)
   align-items: center;
   font-weight: 500;
   display: flex;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitbottom_button:hover {
+  background-color: var(--Backgroundlightgray);
 }
 @keyframes pulse {
   0%,
@@ -1367,7 +1395,7 @@ color: var(--TextColor1)
 
 .contbox-top{
   display: flex;
-  align-items: cenrer;
+  align-items: center;
 }
 
         @media (min-width: 769px) {
