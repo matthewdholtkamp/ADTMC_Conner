@@ -3563,8 +3563,10 @@ menuIconBox.addEventListener('click', function() {
   var Q4 = ADT.querySelector(".Q4")
   var Q5 = ADT.querySelector(".Q5")
   if(QRED == null){null}else{
-    if(QRED.querySelector(".dispobar").classList.contains("DACT")){
-      if(QRED.querySelector(".slider").classList.contains("yes")){
+    const QRED_slider = QRED.querySelector(".slider");
+    const QRED_dispobar = QRED.querySelector(".dispobar");
+    if(QRED_dispobar.classList.contains("DACT")){
+      if(QRED_slider.classList.contains("yes")){
         clearboard();
         let el = QRED
         let NEXT = el.nextElementSibling
@@ -3574,15 +3576,15 @@ menuIconBox.addEventListener('click', function() {
           NEXT = NEXT.nextElementSibling
         }
       }
-      if(QRED.querySelector(".slider").classList.contains("no")){
+      if(QRED_slider.classList.contains("no")){
         clearboard()
         Q1.classList.add("open")
       }
     }else{
-      if(QRED.querySelector(".slider").classList.contains("yes")){
+      if(QRED_slider.classList.contains("yes")){
         clearboard()
       }
-      if(QRED.querySelector(".slider").classList.contains("no")){
+      if(QRED_slider.classList.contains("no")){
         clearboard()
         if(QRED.nextElementSibling.classList.contains("ACTN")){
           QRED.nextElementSibling.classList.add("open")
@@ -3596,8 +3598,10 @@ menuIconBox.addEventListener('click', function() {
     }
   } // START OF Q1 JUSTIFY
   if(Q1 == null){null}else{
-    if(Q1.querySelector(".dispobar").classList.contains("DACT")){
-      if(Q1.querySelector(".slider").classList.contains("yes")){
+    const Q1_slider = Q1.querySelector(".slider");
+    const Q1_dispobar = Q1.querySelector(".dispobar");
+    if(Q1_dispobar.classList.contains("DACT")){
+      if(Q1_slider.classList.contains("yes")){
         clearboard();
         let el = Q1
         let NEXT = el.nextElementSibling
@@ -3607,15 +3611,15 @@ menuIconBox.addEventListener('click', function() {
           NEXT = NEXT.nextElementSibling
         }
       }
-      if(Q1.querySelector(".slider").classList.contains("no")){
+      if(Q1_slider.classList.contains("no")){
         clearboard()
         Q2.classList.add("open")
       }
     }else{
-      if(Q1.querySelector(".slider").classList.contains("yes")){
+      if(Q1_slider.classList.contains("yes")){
         clearboard()
       }
-      if(Q1.querySelector(".slider").classList.contains("no")){
+      if(Q1_slider.classList.contains("no")){
         clearboard()
         if(Q1.nextElementSibling.classList.contains("ACTN")){
           Q1.nextElementSibling.classList.add("open")
@@ -3627,8 +3631,10 @@ menuIconBox.addEventListener('click', function() {
     }
   } // START OF Q2 JUSTIFY
   if(Q2 == null){null}else{
-    if(Q2.querySelector(".dispobar").classList.contains("DACT")){
-      if(Q2.querySelector(".slider").classList.contains("yes")){
+    const Q2_slider = Q2.querySelector(".slider");
+    const Q2_dispobar = Q2.querySelector(".dispobar");
+    if(Q2_dispobar.classList.contains("DACT")){
+      if(Q2_slider.classList.contains("yes")){
         clearboard();
         let el = Q2
         let NEXT = el.nextElementSibling
@@ -3638,15 +3644,15 @@ menuIconBox.addEventListener('click', function() {
           NEXT = NEXT.nextElementSibling
         }
       }
-      if(Q2.querySelector(".slider").classList.contains("no")){
+      if(Q2_slider.classList.contains("no")){
         clearboard()
         Q3.classList.add("open")
       }
     }else{
-      if(Q2.querySelector(".slider").classList.contains("yes")){
+      if(Q2_slider.classList.contains("yes")){
         clearboard()
       }
-      if(Q2.querySelector(".slider").classList.contains("no")){
+      if(Q2_slider.classList.contains("no")){
         clearboard()
         if(Q2.nextElementSibling && Q2.nextElementSibling.classList.contains("ACTN")){
           Q2.nextElementSibling.classList.add("open")
@@ -3659,65 +3665,81 @@ menuIconBox.addEventListener('click', function() {
     }
   } // START OF Q3 JUSTIFY
   if(Q3 == null){null}else{
-    if(Q3.querySelector(".dispobar").classList.contains("DACT")){
-      if(Q3.querySelector(".slider").classList.contains("yes")){
+    const Q3_slider = Q3.querySelector(".slider");
+    const Q3_dispobar = Q3.querySelector(".dispobar");
+    if(Q3_dispobar.classList.contains("DACT")){
+      if(Q3_slider.classList.contains("yes")){
         clearboard();
         let el = Q3
         let NEXT = el.nextElementSibling
         while(NEXT.classList.contains("ACTY")){
           NEXT.classList.add("open")
-          if(NEXT.querySelector(".slider").classList.contains("no")){if(Q4 == null){null}else{Q4.classList.add("open")}}
+          if(NEXT.querySelector(".slider").classList.contains("no")){if(Q4 == null){null}else{
+    const Q4_slider = Q4.querySelector(".slider");
+    const Q4_dispobar = Q4.querySelector(".dispobar");Q4.classList.add("open")}}
           NEXT = NEXT.nextElementSibling
         }
       }
-      if(Q3.querySelector(".slider").classList.contains("no")){
+      if(Q3_slider.classList.contains("no")){
         clearboard()
         Q4.classList.add("open")
       }
     }else{
-      if(Q3.querySelector(".slider").classList.contains("yes")){
+      if(Q3_slider.classList.contains("yes")){
         clearboard()
       }
-      if(Q3.querySelector(".slider").classList.contains("no")){
+      if(Q3_slider.classList.contains("no")){
         clearboard()
         if(Q3.nextElementSibling == null){null}else{
         if(Q3.nextElementSibling.classList.contains("ACTN")){
           Q3.nextElementSibling.classList.add("open")
-          if(Q4 == null){null}else{Q4.classList.add("open")}
+          if(Q4 == null){null}else{
+    const Q4_slider = Q4.querySelector(".slider");
+    const Q4_dispobar = Q4.querySelector(".dispobar");Q4.classList.add("open")}
         }else{
-          if(Q4 == null){null}else{Q4.classList.add("open")}
+          if(Q4 == null){null}else{
+    const Q4_slider = Q4.querySelector(".slider");
+    const Q4_dispobar = Q4.querySelector(".dispobar");Q4.classList.add("open")}
         }}
       }
     }
   } // START OF Q4 JUSTIFY
   if(Q4 == null){null}else{
-    if(Q4.querySelector(".dispobar").classList.contains("DACT")){
-      if(Q4.querySelector(".slider").classList.contains("yes")){
+    const Q4_slider = Q4.querySelector(".slider");
+    const Q4_dispobar = Q4.querySelector(".dispobar");
+    if(Q4_dispobar.classList.contains("DACT")){
+      if(Q4_slider.classList.contains("yes")){
         clearboard();
         let el = Q4
         let NEXT = el.nextElementSibling
         while(NEXT.classList.contains("ACTY")){
           NEXT.classList.add("open")
           if(NEXT.querySelector(".slider").classList.contains("no")){
-            if(Q5 == null){null}else{Q5.classList.add("open")}}
+            if(Q5 == null){null}else{
+    const Q5_slider = Q5.querySelector(".slider");
+    const Q5_dispobar = Q5.querySelector(".dispobar");Q5.classList.add("open")}}
           NEXT = NEXT.nextElementSibling
         }
       }
-      if(Q4.querySelector(".slider").classList.contains("no")){
+      if(Q4_slider.classList.contains("no")){
         clearboard()
         Q5.classList.add("open")
       }
     }else{
-      if(Q4.querySelector(".slider").classList.contains("yes")){
+      if(Q4_slider.classList.contains("yes")){
         clearboard()
       }
-      if(Q4.querySelector(".slider").classList.contains("no")){
+      if(Q4_slider.classList.contains("no")){
         clearboard()
         if(Q4.nextElementSibling.classList.contains("ACTN")){
           Q4.nextElementSibling.classList.add("open")
-          if(Q5 == null){null}else{Q5.classList.add("open")}
+          if(Q5 == null){null}else{
+    const Q5_slider = Q5.querySelector(".slider");
+    const Q5_dispobar = Q5.querySelector(".dispobar");Q5.classList.add("open")}
         }else{
-          if(Q5 == null){null}else{Q5.classList.add("open")}
+          if(Q5 == null){null}else{
+    const Q5_slider = Q5.querySelector(".slider");
+    const Q5_dispobar = Q5.querySelector(".dispobar");Q5.classList.add("open")}
         }
       }
     }
@@ -3894,7 +3916,8 @@ function clearboard(){
   let CLP = CL.nextElementSibling
   while(CLP){
   CLP.classList.remove("open")
-  CLP.querySelector(".slider").classList.remove("o","yes","no")
+  const slider = CLP.querySelector(".slider");
+  if (slider !== null) { slider.classList.remove("o","yes","no"); }
 
   // ⚡ Bolt: Cache DOM queries to prevent redundant lookups and layout thrashing inside while loops
   const yikes = CLP.querySelector(".dispobox.Yikes");
