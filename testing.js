@@ -3552,16 +3552,36 @@ menuIconBox.addEventListener('click', function() {
 });
 
 /* Removed dispo-icon listeners for event delegation *//* Removed close listeners for event delegation *///question yes-no slider action + justify() at end
+// ⚡ Bolt: Cache Q elements per ADTsheet using WeakMap to avoid O(n) lookups during high-frequency justify calls and prevent memory leaks
+const cachedSheetsQs = new WeakMap();
+
 /* Removed Aa listeners for event delegation */function justify(){
   var ADT = document.querySelector(".ADTsheet.selected")
+  if (!ADT) return;
   var bottom = document.querySelector(".bottommarker")
   const bottomboxes = document.querySelector(".info-container")
-  var QRED = ADT.querySelector(".QRED")
-  var Q1 = ADT.querySelector(".Q1")
-  var Q2 = ADT.querySelector(".Q2")
-  var Q3 = ADT.querySelector(".Q3")
-  var Q4 = ADT.querySelector(".Q4")
-  var Q5 = ADT.querySelector(".Q5")
+
+  // ⚡ Bolt: Retrieve or initialize cached Q elements for this sheet to prevent redundant DOM queries
+  let Qs = cachedSheetsQs.get(ADT);
+  if (!Qs) {
+    Qs = {
+      QRED: ADT.querySelector(".QRED"),
+      Q1: ADT.querySelector(".Q1"),
+      Q2: ADT.querySelector(".Q2"),
+      Q3: ADT.querySelector(".Q3"),
+      Q4: ADT.querySelector(".Q4"),
+      Q5: ADT.querySelector(".Q5")
+    };
+    cachedSheetsQs.set(ADT, Qs);
+  }
+
+  var QRED = Qs.QRED;
+  var Q1 = Qs.Q1;
+  var Q2 = Qs.Q2;
+  var Q3 = Qs.Q3;
+  var Q4 = Qs.Q4;
+  var Q5 = Qs.Q5;
+
   if(QRED == null){null}else{
     if(QRED.querySelector(".dispobar").classList.contains("DACT")){
       if(QRED.querySelector(".slider").classList.contains("yes")){
@@ -3896,7 +3916,8 @@ function clearboard(){
   CLP.classList.remove("open")
   CLP.querySelector(".slider").classList.remove("o","yes","no")
 
-  // ⚡ Bolt: Cache DOM queries to prevent redundant lookups and layout thrashing inside while loops
+  // ⚡ Bolt: Use multiple querySelector calls instead of querySelectorAll because querySelector performs a DFS
+  // and immediately returns, which is faster here than finding all matches to generate a static NodeList.
   const yikes = CLP.querySelector(".dispobox.Yikes");
   if(yikes !== null){yikes.classList.remove("open")}
 
