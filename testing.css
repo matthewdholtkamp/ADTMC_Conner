@@ -1493,6 +1493,11 @@ color: var(--TextColor1)
   align-items: center;
   font-weight: 500;
   display: flex;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+.submitbottom_button:hover{
+  opacity: 0.8;
 }
 @keyframes pulse {
   0%,
@@ -1583,7 +1588,10 @@ color: var(--TextColor1)
     min-height: 50px;
     bottom: var(--space-4);
     cursor: pointer;
-    transition: opacity var(--transition-normal), visibility var(--transition-normal), height var(--transition-normal), bottom var(--transition-normal);
+    transition: opacity var(--transition-normal), visibility var(--transition-normal), height var(--transition-normal), bottom var(--transition-normal), transform var(--transition-fast);
+}
+.bg4:hover {
+    transform: scale(1.01);
 }
 
         .bg-helper{
@@ -1626,6 +1634,11 @@ color: var(--TextColor1)
     min-height: 50px;
     bottom: var(--space-4);
     cursor: pointer;
+    transition: height var(--transition-normal), opacity var(--transition-normal), bottom var(--transition-normal);
+}
+
+.bg4:not(.closed):hover {
+    opacity: 0.9;
 }
 
 .bg4.keyed {
@@ -1698,6 +1711,11 @@ color: var(--TextColor1)
             font-size: var(--font-size-base);
             cursor: pointer;
             flex: 1; /* Expand label to fill space */
+            transition: opacity var(--transition-fast);
+        }
+
+        .item-tag label:hover {
+            opacity: 0.8;
         }
 
         .panel-title {
@@ -1709,6 +1727,12 @@ color: var(--TextColor1)
             justify-content: center;
             align-items: center;
             letter-spacing: 0.025em;
+            cursor: pointer;
+            transition: opacity var(--transition-fast);
+        }
+
+        .panel-title:hover {
+            opacity: 0.8;
         }
 
         .bg4.keyed .panel-title,
