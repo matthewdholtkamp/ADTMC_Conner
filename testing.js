@@ -3954,6 +3954,8 @@ panel.addEventListener('click', () => {
     if (!panel.classList.contains("keyed") && !panel.classList.contains("copied")) {
         panel.classList.add("keyed");
         helper.classList.add("faded")
+        // 🎨 Palette: Actively manage focus for newly revealed interactive elements
+        setTimeout(() => checkbox1.focus(), 300);
     }
 });
 
@@ -3963,6 +3965,8 @@ copyButton.addEventListener('click', () => {
       panel.classList.add("copied");
       panel.classList.remove("keyed");
       writenote()
+      // 🎨 Palette: Actively manage focus for newly revealed interactive elements
+      setTimeout(() => finalbutton.focus(), 300);
     }
 });
 // Close panel when clicking outside
