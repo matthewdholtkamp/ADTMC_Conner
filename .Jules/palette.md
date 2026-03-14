@@ -33,3 +33,7 @@
 ## 2026-03-09 - Binding Expandable Content to Controls
 **Learning:** Adding `aria-expanded` to toggle buttons isn't enough; screen readers also need to know *what* the button controls. For dynamically populated or numerous identical components (like accordions or dispo-icons), generating unique IDs for the content containers and linking them with `aria-controls` during initialization ensures the screen reader provides full context.
 **Action:** Whenever `aria-expanded` is used on a control that toggles visibility of another element, make sure to set the `aria-controls` attribute linking the two, dynamically generating unique IDs if necessary.
+
+## 2026-03-14 - Focus Management for State Transitions
+**Learning:** When interactive elements (like expanding panels or accordions) reveal new controls (like checkboxes or buttons), screen reader and keyboard users can lose context if focus remains on the triggering element.
+**Action:** Always actively manage focus by programmatically calling `.focus()` on the most relevant newly revealed element. If the reveal involves a CSS transition, wrap the `.focus()` call in a short `setTimeout` (e.g., 300ms) to ensure the element is visible and focusable before the browser attempts to set focus.
