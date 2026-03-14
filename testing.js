@@ -5112,6 +5112,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // ⚡ Bolt: Cache static DOM elements for the click handler to reduce query overhead
+    let cachedSoapBox = null;
+    let cachedNoteContent = null;
+    let cachedNoteBreak = null;
+
     // Delegated click listener for performance optimization
     document.addEventListener('click', (e) => {
         const target = e.target;
@@ -5312,9 +5317,14 @@ document.addEventListener('DOMContentLoaded', () => {
     var slider = Qs.querySelector(".slider");
     var dispobox = Qs.querySelector(".dispobox.Yikes");
     var dispo = dispobox.querySelector(".dispo-icon")
-    var box = document.querySelector(".SOAPbox")
-    var note_content = document.querySelector(".item-box")
-    var note_break = document.querySelector(".SOAPbreak")
+
+    // ⚡ Bolt: Use lazily cached DOM elements
+    if (!cachedSoapBox) cachedSoapBox = document.querySelector(".SOAPbox");
+    if (!cachedNoteContent) cachedNoteContent = document.querySelector(".item-box");
+    if (!cachedNoteBreak) cachedNoteBreak = document.querySelector(".SOAPbreak");
+    var box = cachedSoapBox;
+    var note_content = cachedNoteContent;
+    var note_break = cachedNoteBreak;
     var back1 = Qs.querySelector(".back1")
     var back2 = Qs.querySelector(".back2")
     var close = Qs.querySelectorAll(".close i")
