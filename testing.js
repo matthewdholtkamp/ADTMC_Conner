@@ -1,7 +1,8 @@
 // Register service worker with content update handling
 if ('serviceWorker' in navigator) {
-  const swPath = '/test2/serviceWorker.js';
-  const scope = '/test2/';
+  const basePath = window.location.pathname.replace(/index\.html$/, '');
+  const swPath = `${basePath}serviceWorker.js`;
+  const scope = basePath;
 
   let registration;
 
@@ -12,10 +13,10 @@ if ('serviceWorker' in navigator) {
       registration.active.postMessage({
         type: 'CHECK_UPDATES',
         urls: [
-          '/test2/index.html',
-          '/test2/testing.css',
-          '/test2/testing.js',
-          '/test2/manifest.json'
+          `${basePath}index.html`,
+          `${basePath}testing.css`,
+          `${basePath}testing.js`,
+          `${basePath}manifest.json`
         ]
       });
     }

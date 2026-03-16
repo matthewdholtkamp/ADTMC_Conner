@@ -7,6 +7,10 @@ ADTMC PWA for mobile/desktop usage.
 
 **Medications are temporarily inaccessible. ETA OCT 2025. Contact me if you have suggestions on features you would like to see in ADTMC.**
 
+**Hosting / PWA Notes**
+- GitHub Pages supported. The PWA start URL and scope are relative (`./`) so it works from any repo path.
+- Service workers only run on `https://` (they will not register if you open `index.html` via `file://`).
+
 **DISCLAIMER**
 ADTMC is the only authorized screening algorithm, this product is not sponsored by any Government or DoD agency,
 nor should it be used for medical purposes without the express permission of your credentialed provider. I do not own any of the doctrine and any appearance or similarity to others is strictly coincidental.
