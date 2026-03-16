@@ -1108,7 +1108,7 @@ li:nth-of-type(even) .texticon {
   margin-left: 15px;
   margin-right: 5px;
   line-height: 1.6;
-  color:var(--Textcolor1);
+  color: var(--TextColor1);
 }
 
 .sub-page {
@@ -1488,7 +1488,7 @@ color: var(--TextColor1)
   height: 50px;
   width: 100%;
   background-color: var(--Backgroundmiddlegray);
-  color: black;
+  color: var(--TextPrimary);
   justify-content: center;
   align-items: center;
   font-weight: 500;
@@ -1791,7 +1791,7 @@ color: var(--TextColor1)
     background-color: var(--Backgroundlightgray);
     border-radius: 10px;
     position: absolute;
-    color: black;
+    color: var(--TextPrimary);
     overflow-x: hidden;
     border: 1px solid rgba(255, 255, 255, 0.3);
     /* Minimal box-shadow */
